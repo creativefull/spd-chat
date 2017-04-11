@@ -1,7 +1,7 @@
 # SPD Chat
 Application chat for your private server
 
-#Introduction
+# Introduction
 Application chat is a proprietary, cross-platform, encrypted instant messaging client for smartphones.It uses the Internet to send text messages, documents, images, video, user location and audio messages to other users using standard cellular mobile numbers.
 As of April 2017.
 

@@ -9,4 +9,4 @@ import React, { Component } from 'react';
 import { AppRegistry } from 'react-native';
 
 import App from './app/container/';
-AppRegistry.registerComponent('SPDChat', () => App);
+AppRegistry.registerComponent('sedulur', () => App);

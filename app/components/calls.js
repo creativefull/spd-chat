@@ -125,13 +125,10 @@ export default class Calls extends Component {
     )
   }
 
+
   render() {
     return (
       <View style={{ flex:1 }}>
-        <ListView
-          dataSource={this.state.dataSource}
-          renderRow={(rowData) => this.eachMessage(rowData)}
-        />
       </View>
     );
   }

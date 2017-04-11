@@ -22,7 +22,7 @@ export default class ThreePanels extends Component {
     return (
       <View style={{ flex:1 }}>
         <View style ={styles.topBit}>
-          <Text style={styles.logo}>SPDChat</Text>
+          <Text style={styles.logo}>Sedulur</Text>
           <View style={styles.row}>
             <Icon name="search" color='#fff' size={23} style={{ padding:5 }} />
             <Icon name="chat" color='#fff' size={23} style={{ padding:5 }} />
