@@ -81,8 +81,10 @@ export default class Contacts extends Component {
 
   // <Text style={{ fontWeight:'400', color:'#666', fontSize:12, marginLeft:15 }}>{x.message}</Text>
   eachMessage(x){
+    var name = x.first_name+" "+ x.last_name;
     return (
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress ={() => {this.props.navigator.push({id:'chat', image:1, name: name , receiver : x._id}) }}>
         <View style={{ alignItems:'center', padding:10, flexDirection:'row', borderBottomWidth:1, borderColor:'#f7f7f7' }}>
           <Image source={require('../images/eminem.jpg')} style={{ borderRadius:30, width:60, height:60 }} resizeMode='contain' />
           <View>
