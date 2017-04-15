@@ -7,15 +7,21 @@ import {
   Navigator,
   View
 } from 'react-native';
+import io from 'socket.io-client';
+import SplashScreen from 'react-native-splash-screen'
 
 import Home from './threeTabs'
 import Chat from './eachchat'
+import Login from './login'
+import {API} from './api'
 
 export default class Index extends Component {
   constructor(props){
     super(props)
+    this.socket = io(API, {jsonp : false})
   }
-
+  componentDidMount() {
+  }
   renderScene(route, navigator) {
     const {state,actions} = this.props;
     const routeId = route.id;
@@ -38,6 +44,16 @@ export default class Index extends Component {
           navigator={navigator} />
       );
     }
+
+    if (routeId === 'login') {
+      return (
+        <Login
+          {...this.props}
+          socket={this.socket}
+          navigator={navigator}
+        />
+      )
+    }
   }
 
   render() {
@@ -46,7 +62,7 @@ export default class Index extends Component {
         <Navigator
           style={{ flex:1 }}
           ref={'NAV'}
-          initialRoute={{ id: 'home', name: 'home' }}
+          initialRoute={{ id: 'login', name: 'login' }}
           renderScene={this.renderScene.bind(this)}
         />
       </View>
