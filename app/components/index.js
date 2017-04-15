@@ -24,8 +24,7 @@ export default class Index extends Component {
       return (
         <Home
           {...this.props}
-          navigator={navigator}
-        />
+          navigator={navigator}/>
       );
     }
 
