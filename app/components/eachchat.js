@@ -116,16 +116,15 @@ export default class Chaty extends Component {
         style={{ flex:1, }}
         contentContainerStyle={{ justifyContent:'flex-end' }}
         dataSource={this.state.datasource}
-        renderRow={(rowData) => this.eachMessage(rowData, image)}
-      />
+        renderRow={(rowData) => this.eachMessage(rowData, image)}/>
+        
         <View style={{ alignSelf:'flex-end', padding:10, height:60, width:width, borderTopWidth:1, borderColor:'#f3f3f3', backgroundColor:'#fff' }}>
           <TextInput
             style={{ flex:1, }}
             value={note}
             onChangeText={(note) => this.setState({ note })}
             onSubmitEditing={() => this.submitThis()}
-            placeholder="Enter Your message here"
-          />
+            placeholder="Enter Your message here"/>
         </View>
     </Image>
     );
