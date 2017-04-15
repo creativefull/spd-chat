@@ -13,7 +13,8 @@ import {
   ListView,
   Image,
   Text,
-  View
+  View,
+  AsyncStorage
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';

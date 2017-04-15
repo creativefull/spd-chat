@@ -4,7 +4,7 @@ const initStyle = { borderRadius: 30, width: 60, height: 60 };
 const renderImages = (num, style = initStyle) => {
   switch (num) {
     case 1:
-      return <Image source={require(`../images/image1.jpeg`)} style={style} resizeMode='contain' />;
+      return <Image source={require('../images/image1.jpeg')} style={style} resizeMode='contain' />;
     case 2:
       return <Image source={require('../images/image2.jpeg')} style={style} resizeMode='contain' />;
     case 3:

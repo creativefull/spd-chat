@@ -5,10 +5,10 @@ import {
   Text,
   TouchableOpacity,
   Navigator,
-  View
+  View,
+  AsyncStorage
 } from 'react-native';
 import io from 'socket.io-client';
-import SplashScreen from 'react-native-splash-screen'
 
 import Home from './threeTabs'
 import Chat from './eachchat'
@@ -18,10 +18,41 @@ import {API} from './api'
 export default class Index extends Component {
   constructor(props){
     super(props)
-    this.socket = io(API, {jsonp : false})
+    this.socket = io(API, {jsonp : false});
   }
+
+  _onCheckSession() {
+    let loginIn = false;
+    let firstNav = {};
+    AsyncStorage.getItem('session', (err, results) => {
+      if (results == null ) {
+        loginIn = false;
+        firstNav = {
+          id : 'login',
+          title : '',
+        }
+      } else {
+        loginIn = true;
+        firstNav = {
+          id : 'home',
+          title : ''
+        }
+      }
+      this.setState({
+        loginIn : loginIn,
+        loaded : true,
+        obj : firstNav,
+      });
+    });
+  }
+
+  componentWillMount() {
+    this._onCheckSession();
+  }
+
   componentDidMount() {
   }
+
   renderScene(route, navigator) {
     const {state,actions} = this.props;
     const routeId = route.id;
@@ -30,6 +61,7 @@ export default class Index extends Component {
       return (
         <Home
           {...this.props}
+          socket={this.socket}
           navigator={navigator}/>
       );
     }
@@ -39,7 +71,9 @@ export default class Index extends Component {
         <Chat
           {...this.props}
           image={route.image}
+          socket={this.socket}
           name={route.name}
+          receiver = {route.receiver}
           navigator={navigator} />
       );
     }
@@ -48,9 +82,9 @@ export default class Index extends Component {
       return (
         <Login
           {...this.props}
+          _onCheckSession = {this._onCheckSession}
           socket={this.socket}
-          navigator={navigator}
-        />
+          navigator={navigator}/>
       )
     }
   }
@@ -61,9 +95,8 @@ export default class Index extends Component {
         <Navigator
           style={{ flex:1 }}
           ref={'NAV'}
-          initialRoute={{ id: 'login', name: 'login' }}
-          renderScene={this.renderScene.bind(this)}
-        />
+          initialRoute={{ id: 'home', name: 'login' }}
+          renderScene={this.renderScene.bind(this)}/>
       </View>
     )
   }

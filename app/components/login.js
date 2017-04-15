@@ -4,47 +4,93 @@ import {
     Text,
     StyleSheet,
     TextInput,
-    TouchableHighlight
+    TouchableHighlight,
+    AsyncStorage
 } from 'react-native';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 export default class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
             username : '',
-            password : ''
+            password : '',
+            visible : false,
+            pesan : '',
+            empty : false,
         }
         this.socket = this.props.socket
     }
+
     componentWillMount() {
-        this.socket.on('login', function(data) {
-            console.log(data);
-        })
+        var self = this;
+        this.socket.on('login', function (data) {
+            if (data.status == 200 ) {
+              AsyncStorage.setItem('session',JSON.stringify(data.data), () => {
+                self.setState({
+                  visible : false,
+                  empty : false,
+                  pesan : '',
+                  password : '',
+                  username : ''
+                });
+                self.props.navigator.push({
+                  id : 'home',
+                  title : ''
+                })
+              });
+            } else {
+              self.setState({
+                visible : false,
+                empty : true,
+                pesan : data.msg,
+              });
+            }
+        });
     }
+
     _login() {
+      this.setState({
+        visible : true,
+        empty : false,
+        pesan : '',
+      });
+      let data = {...this.state};
+      if (data.username == '' || data.password == '') {
+        this.setState({
+          visible : false,
+          empty : true,
+          pesan : 'data masih ada yang kosong !!!',
+        });
+      } else {
         this.socket.emit('login', {
             username : this.state.username,
             password : this.state.password
-        })
+        });
+      }
     }
     render() {
         return (
             <View style={style.container}>
+                <Spinner
+                  color = {'#2980b9'}
+                  visible = {this.state.visible} />
                 <Text style={style.titleApp}>Sadulur</Text>
                 <Text style={style.subTitle}>Sign In Application</Text>
+                <View style = {{alignItems : 'center'}} >
+                  <Text style = {{color : 'red', marginBottom : 10}} > {this.state.pesan} </Text>
+                </View>
                 <TextInput
-                    style={style.inputcontrol}
+                    style={[style.inputcontrol, this.state.empty ? {borderWidth : 1, borderColor : 'red'} : { borderWidth : 0}]}
                     underlineColorAndroid="transparent"
                     placeholder="Username"
-                    onChangeText={(text) => this.setState({username : text})}
-                />
+                    onChangeText={(text) => this.setState({username : text})}/>
                 <TextInput
-                    style={style.inputcontrol}
+                    style={[style.inputcontrol, this.state.empty ? {borderWidth : 1, borderColor : 'red'} : { borderWidth : 0}]}
                     underlineColorAndroid="transparent"
                     secureTextEntry={true}
                     placeholder="Password"
-                    onChangeText={(text) => this.setState({password : text})}
-                />
+                    onChangeText={(text) => this.setState({password : text})}/>
                 <TouchableHighlight
                     onPress={() => this._login()}
                     style={style.btncontrol}>

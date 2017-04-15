@@ -8,7 +8,8 @@ import {
   Image,
   TouchableOpacity,
   Text,
-  View
+  View,
+  AsyncStorage
 } from 'react-native';
 
 import renderImages from '../fake/fakeImage';
@@ -22,48 +23,48 @@ export default class Chats extends Component {
     super(props)
 
     this.state = {
-      dataSource: ds.cloneWithRows(data),
+      dataSource: ds.cloneWithRows([]),
     }
+    this.socket = this.props.socket;
+  }
+
+  componentDidMount() {
+    this._onFetch();
+  }
+
+  componentWillMount() {
+    var self = this;
+    this.socket.on('listChat', function (hasil){
+      self.setState({
+        dataSource : ds.cloneWithRows(hasil)
+      });
+    });
+  }
+
+  _onFetch () {
+    AsyncStorage.getItem('session', (err, result) => {
+      if (result != null ) {
+        var obj = JSON.parse(result);
+        var self = this;
+        this.socket.emit('listChat',obj);
+      }
+    });
   }
 
   eachMessage(x){
-    const num = Math.floor(Math.random() * 3) + 1
-
-    if (num > 1) {
-     return (
-      <TouchableOpacity onPress ={() => {this.props.navigator.push({id:'chat', image:x.image, name:x.first_name}) }}>
+    var name = x.first_name+" "+ x.last_name;
+    return (
+      <TouchableOpacity onPress ={() => {this.props.navigator.push({id:'chat', image:1, name: name , receiver : x._id}) }}>
         <View style={{ alignItems:'center', padding:10, flexDirection:'row', borderBottomWidth:1, borderColor:'#f7f7f7' }}>
           {
-            renderImages(x.image)
+            renderImages(1)
           }
           <View>
             <View style={{ flexDirection:'row', justifyContent:'space-between', width:280 }}>
               <Text style={{ marginLeft:15, fontWeight:'600' }}>{x.first_name} {x.last_name}</Text>
-              <Text style={{ color:'#333', fontSize:10 }}>{x.time}</Text>
             </View>
             <View style={{ flexDirection:'row', alignItems:'center' }}>
               <Text style={{ fontWeight:'400', color:'#333', marginLeft:15 }}>Can I come over to yours tonight?</Text>
-            </View>
-          </View>
-        </View>
-      </TouchableOpacity>
-    )
-   }
-
-    return (
-      <TouchableOpacity>
-        <View style={{ alignItems:'center', padding:10, flexDirection:'row', borderBottomWidth:1, borderColor:'#f7f7f7' }}>
-          {
-            renderImages(x.image)
-          }
-          <View>
-            <View style={{ flexDirection:'row', justifyContent:'space-between', width:280 }}>
-              <Text style={{ marginLeft:15, fontWeight:'600' }}>{x.first_name} {x.last_name}</Text>
-              <Text style={{ color:'#333', fontSize:10 }}>{x.time}</Text>
-            </View>
-            <View style={{ flexDirection:'row', alignItems:'center' }}>
-              <Icon name="done-all" size={15} color="#7dd5df" style={{ marginLeft:15, marginRight:5 }} />
-              <Text style={{ fontWeight:'400', color:'#333' }}>{x.message}</Text>
             </View>
           </View>
         </View>
@@ -75,6 +76,7 @@ export default class Chats extends Component {
     return (
       <View style={{ flex:1 }}>
         <ListView
+          enableEmptySections={true}
           dataSource={this.state.dataSource}
           renderRow={(rowData) => this.eachMessage(rowData)}
         />

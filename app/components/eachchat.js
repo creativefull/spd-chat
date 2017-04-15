@@ -16,7 +16,8 @@ import {
   Dimensions,
   Image,
   Text,
-  View
+  View,
+  AsyncStorage
 } from 'react-native';
 
 import renderImages from '../fake/fakeImage';
@@ -32,51 +33,99 @@ export default class Chaty extends Component {
     super(props)
 
     this.state = {
-      datasource: ds.cloneWithRows(convo),
-      note: ""
+      receiver : this.props.receiver ? this.props.receiver : '',
+      datasource: ds.cloneWithRows([]),
+      note: "",
+      user : '',
+      arr : []
     }
+    this.socket = this.props.socket;
+  }
+
+  componentDidMount() {
+    this._onFetch();
+  }
+
+  componentWillMount() {
+    var self = this;
+    this.socket.on('getDirectMsg', function (hasil){
+      // console.log(hasil);
+      self.setState({
+        datasource : ds.cloneWithRows(hasil),
+        arr : hasil
+      });
+    });
+
+    this.socket.on('directMsg', function (obj){
+      let arr = self.state.arr;
+      arr.push(obj.data);
+      arr = arr.reverse();
+      console.log(arr);
+      self.setState({
+        arr : arr,
+        datasource : ds.cloneWithRows(arr)
+      })
+    });
+  }
+
+  _onFetch () {
+    AsyncStorage.getItem('session', (err, result) => {
+      if (result != null ) {
+        var obj = JSON.parse(result);
+        let data = {
+          sender : obj._id,
+          receiver : this.state.receiver
+        }
+        this.setState({
+          user : obj._id
+        });
+        this.socket.emit('getDirectMsg',data);
+      }
+    });
   }
 
   eachMessage(x, image){
-    if(x.person == 2){
+    let sender = this.state.user;
+    if(x.sender != sender){
       return (
         <View style={{ flexDirection:'row', alignItems:'flex-end', margin:5 }}>
           {
             renderImages(image, userIcon)
           }
           <View style={{ width:220, borderRadius:10, backgroundColor:'#f4f4f4', padding:10 }}>
-            <Text style={{ fontSize:15, color:'#555', fontWeight:'600' }}>{x.note}</Text>
+            <Text style={{ fontSize:15, color:'#555', fontWeight:'600' }}>{x.msg}</Text>
           </View>
         </View>
       )
-      } else {
+    } else {
         return (
           <View style={{ flexDirection:'row', alignSelf:'flex-end', alignItems:'flex-end', margin:5 }}>
             <View style={{ width:220, borderRadius:10, backgroundColor:'#00b499', padding:10 }}>
-              <Text style={{ fontSize:15, color:'#fff', fontWeight:'600' }}>{x.note}</Text>
+              <Text style={{ fontSize:15, color:'#fff', fontWeight:'600' }}>{x.msg}</Text>
             </View>
             <Image
               source ={require('../images/profile.jpg')}
               resizeMode="contain"
-              style={userIcon}
-            />
+              style={userIcon}/>
           </View>
-        )}
+        );
+    }
   }
+
   submitThis(){
-    convo.push({
-      person: 1,
-      note: this.state.note
-    });
-
-    this.setState({
-      datasource: ds.cloneWithRows(convo.reverse()),
-      note: ''
-    })
-
-    setTimeout(() => {
-      this.similator();
-    }, 2000);
+    let sender = this.state.user;
+    let note = this.state.note;
+    if (note != '') {
+      let obj = {
+        sender : sender,
+        msg : note,
+        receiver : this.state.receiver
+      }
+      this.socket.emit('directMsg',obj);
+      this.setState({
+        note: ''
+      });
+    }
   }
 
   similator(){
@@ -120,6 +169,7 @@ export default class Chaty extends Component {
         
         <View style={{ alignSelf:'flex-end', padding:10, height:60, width:width, borderTopWidth:1, borderColor:'#f3f3f3', backgroundColor:'#fff' }}>
           <TextInput
+            ref = "input"
             style={{ flex:1, }}
             value={note}
             onChangeText={(note) => this.setState({ note })}

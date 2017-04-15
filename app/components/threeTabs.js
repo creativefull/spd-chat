@@ -37,7 +37,7 @@ export default class ThreePanels extends Component {
         >
           <Calls tabLabel="RESCUE" />
           <Chats tabLabel="CHAT" {...this.props} />
-          <Contacts tabLabel="CONTACTS" />
+          <Contacts tabLabel="CONTACTS" {...this.props}/>
         </ScrollableTabView>
       </View>
     );
