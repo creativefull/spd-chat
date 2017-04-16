@@ -17,7 +17,8 @@ import {
   Image,
   Text,
   View,
-  AsyncStorage
+  AsyncStorage,
+  BackAndroid
 } from 'react-native';
 
 import renderImages from '../fake/fakeImage';
@@ -28,44 +29,68 @@ const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 const iconStyle = { width:30, height:30, borderRadius:15, margin:5 };
 const userIcon = { height:40, width:40, margin:5, borderRadius:20, backgroundColor:'#f8f8f8' };
 
+BackAndroid.addEventListener('hardwareBackPress', () => {
+  if (_navigator.getCurrentRoutes().length === 1  ) {
+    return false;
+  }
+  _navigator.pop();
+  return true;
+});
+
 export default class Chaty extends Component {
   constructor(props){
     super(props)
 
     this.state = {
-      receiver : this.props.receiver ? this.props.receiver : '',
+      receiver : this.props.receiver ? this.props.receiver : null,
       datasource: ds.cloneWithRows([]),
-      note: "",
-      user : '',
+      note: null,
+      user : null,
       arr : []
     }
+    _navigator = this.props.navigator;
     this.socket = this.props.socket;
   }
 
   componentDidMount() {
+    this._mounted = true;
+    var self = this;
     this._onFetch();
+    this.socket.on('getDirectMsg', function (hasil){
+      let sender = self.state.user;
+      if (sender == hasil.sender || sender == hasil.receiver) {
+        self.setState({
+          datasource : ds.cloneWithRows(hasil.data),
+          arr : hasil.data
+        });
+      }
+    });
+
+    this.onRealTime();
+  }
+
+  componentWillUnmount() {
+    this._mounted = false;
+  }
+
+  onRealTime () {
+    var self = this;
+    this.socket.on('directMsg', function (obj){
+      // console.log(obj);
+      let arr = self.state.arr;
+      if (obj.data.receiver == self.state.user) {
+        // arr.push(obj.data);
+        arr.splice(0,0,obj.data);
+        self.setState({
+          arr : arr,
+          datasource : ds.cloneWithRows(arr)
+        });
+      }
+    });
   }
 
   componentWillMount() {
-    var self = this;
-    this.socket.on('getDirectMsg', function (hasil){
-      // console.log(hasil);
-      self.setState({
-        datasource : ds.cloneWithRows(hasil),
-        arr : hasil
-      });
-    });
-
-    this.socket.on('directMsg', function (obj){
-      let arr = self.state.arr;
-      arr.push(obj.data);
-      arr = arr.reverse();
-      console.log(arr);
-      self.setState({
-        arr : arr,
-        datasource : ds.cloneWithRows(arr)
-      })
-    });
+    // this.onRealTime();
   }
 
   _onFetch () {
@@ -113,27 +138,24 @@ export default class Chaty extends Component {
   }
 
   submitThis(){
-    let sender = this.state.user;
-    let note = this.state.note;
+    var sender = this.state.user;
+    var note = this.state.note;
     if (note != '') {
-      let obj = {
+      var obj = {
         sender : sender,
         msg : note,
         receiver : this.state.receiver
       }
+      var arr = this.state.arr;
+      arr.push(obj);
+      arr = arr.reverse();
       this.socket.emit('directMsg',obj);
       this.setState({
-        note: ''
+        note: '',
+        arr : arr,
+        datasource : ds.cloneWithRows(arr)
       });
     }
-  }
-
-  similator(){
-    convo.reverse();
-    convo.push({person:2, note:"When are we gonna hangout Sam!!!!"})
-    this.setState({
-      datasource: ds.cloneWithRows(convo.reverse())
-    })
   }
 
   render() {

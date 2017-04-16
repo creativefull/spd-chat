@@ -14,8 +14,8 @@ import {
 
 import renderImages from '../fake/fakeImage';
 import { images, data } from '../fake/fakeChatList';
+import Empty from './empty';
 
-// const images = R.range(1, 11).map(i => require(`../images/image${i}.jpeg`))
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
 export default class Chats extends Component {
@@ -24,6 +24,7 @@ export default class Chats extends Component {
 
     this.state = {
       dataSource: ds.cloneWithRows([]),
+      empty : false,
     }
     this.socket = this.props.socket;
   }
@@ -34,10 +35,18 @@ export default class Chats extends Component {
 
   componentWillMount() {
     var self = this;
+    // this._onFetch();
     this.socket.on('listChat', function (hasil){
-      self.setState({
-        dataSource : ds.cloneWithRows(hasil)
-      });
+      if (hasil.length != 0) {
+        self.setState({
+          dataSource : ds.cloneWithRows(hasil),
+          empty : false,
+        });
+      } else {
+        self.setState({
+          empty : true
+        });
+      }
     });
   }
 
@@ -64,7 +73,7 @@ export default class Chats extends Component {
               <Text style={{ marginLeft:15, fontWeight:'600' }}>{x.first_name} {x.last_name}</Text>
             </View>
             <View style={{ flexDirection:'row', alignItems:'center' }}>
-              <Text style={{ fontWeight:'400', color:'#333', marginLeft:15 }}>Can I come over to yours tonight?</Text>
+              <Text style={{ fontWeight:'400', color:'#333', marginLeft:15 }}>{x.messages}</Text>
             </View>
           </View>
         </View>
@@ -73,15 +82,21 @@ export default class Chats extends Component {
   }
 
   render() {
-    return (
-      <View style={{ flex:1 }}>
-        <ListView
-          enableEmptySections={true}
-          dataSource={this.state.dataSource}
-          renderRow={(rowData) => this.eachMessage(rowData)}
-        />
-      </View>
-    );
+    if (!this.state.empty) {
+      return (
+        <View style={{ flex:1 }}>
+          <ListView
+            enableEmptySections={true}
+            dataSource={this.state.dataSource}
+            renderRow={(rowData) => this.eachMessage(rowData)}/>
+        </View>
+      );
+    } else {
+      return (
+        <Empty
+          pesan = "Chat Masih Kosong !!!"/>
+      );
+    }
   }
 }
 

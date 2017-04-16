@@ -19,31 +19,8 @@ import {
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const image1 = require('../images/geasy.jpg')
-const image2 = require('../images/eminem.jpg')
-const image3 = require('../images/kyle.jpg')
-const image4 = require('../images/devon.jpg')
-const data = [{
-  "id": 1,
-  "first_name": "G Eazy",
-  "message": "I just need to be alone",
-  "image": image1
-}, {
-  "id": 2,
-  "first_name": "Eminem",
-  "message": "Fuck off",
-  "image": image2
-}, {
-  "id": 2,
-  "first_name": "Kyle",
-  "message": "Lame NI**As hide your girls",
-  "image": image3
-}, {
-  "id": 2,
-  "first_name": "Devon Baldwin",
-  "message": "Where the Avacados at tho?",
-  "image": image4
-}]
+import Empty from './empty';
+
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
 export default class Contacts extends Component {
@@ -64,9 +41,16 @@ export default class Contacts extends Component {
   componentWillMount() {
     var self = this;
     this.socket.on('listContact', function (hasil){
-      self.setState({
-        dataSource : ds.cloneWithRows(hasil)
-      });
+      if (hasil.length != 0) {
+        self.setState({
+          dataSource : ds.cloneWithRows(hasil),
+          empty : false,
+        });
+      } else {
+        self.setState({
+          empty : true,
+        });
+      }
     });
   }
 
@@ -101,15 +85,21 @@ export default class Contacts extends Component {
   }
 
   render() {
-    return (
-      <View style={{ flex:1 }}>
-        <ListView
-          enableEmptySections={true}
-          dataSource={this.state.dataSource}
-          renderRow={(rowData) => this.eachMessage(rowData)}
-        />
-      </View>
-    );
+    if (!this.state.empty) {
+      return (
+        <View style={{ flex:1 }}>
+          <ListView
+            enableEmptySections={true}
+            dataSource={this.state.dataSource}
+            renderRow={(rowData) => this.eachMessage(rowData)}/>
+        </View>
+      );
+    } else {
+      return (
+        <Empty
+          pesan = "Contact Masih Kosong !!!"/>
+      );
+    }
   }
 }
 

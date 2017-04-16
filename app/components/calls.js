@@ -14,85 +14,26 @@ import {
   ListView,
   Image,
   Text,
-  View
+  TouchableHighlight,
+  View,
+  AsyncStorage,
+  BackAndroid
 } from 'react-native';
 
-import Icon from 'react-native-vector-icons/MaterialIcons';
+BackAndroid.addEventListener('hardwareBackPress', () => {
+  if (_navigator.getCurrentRoutes().length === 1  ) {
+    return false;
+  }
+  _navigator.pop();
+  return true;
+});
+
+import Empty from './empty';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import renderImages from '../fake/fakeImage';
 
-// const images = R.range(1, 11).map(i => require(`../images/image${i}.jpeg`));
 const images = R.range(1, 11).map(i => i);
-const data = [{
-  "id": 1,
-  "first_name": "Bruce",
-  "incomming": true,
-  "date": "25-Feb-2016",
-  "time": "5:46 PM",
-  "image": images[0]
-}, {
-  "id": 2,
-  "first_name": "Albert",
-  "incomming": true,
-  "date": "31-Jan-2016",
-  "time": "12:38 PM",
-  "image": images[1]
-}, {
-  "id": 3,
-  "first_name": "Douglas",
-  "incomming": true,
-  "date": "01-Jul-2016",
-  "time": "1:33 PM",
-  "image": images[2]
-}, {
-  "id": 4,
-  "first_name": "Eugene",
-  "incomming": true,
-  "date": "19-Feb-2016",
-  "time": "3:59 AM",
-  "image": images[3]
-}, {
-  "id": 5,
-  "first_name": "Michael",
-  "incomming": true,
-  "date": "12-Apr-2016",
-  "time": "9:57 AM",
-  "image": images[4]
-}, {
-  "id": 6,
-  "first_name": "William",
-  "incomming": false,
-  "date": "13-Aug-2016",
-  "time": "9:37 PM",
-  "image": images[5]
-}, {
-  "id": 7,
-  "first_name": "Joshua",
-  "incomming": true,
-  "date": "17-Dec-2015",
-  "time": "4:32 AM",
-  "image": images[6]
-}, {
-  "id": 8,
-  "first_name": "Fred",
-  "incomming": false,
-  "date": "02-Dec-2015",
-  "time": "12:56 AM",
-  "image": images[7]
-}, {
-  "id": 9,
-  "first_name": "Donald",
-  "incomming": false,
-  "date": "27-Oct-2015",
-  "time": "9:02 PM",
-  "image": images[8]
-}, {
-  "id": 10,
-  "first_name": "Bruce",
-  "incomming": true,
-  "date": "13-Sep-2015",
-  "time": "6:20 PM",
-  "image": images[9]
-}]
+
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
 export default class Calls extends Component {
@@ -100,26 +41,71 @@ export default class Calls extends Component {
     super(props)
 
     this.state = {
-      dataSource: ds.cloneWithRows(data),
+      dataSource: ds.cloneWithRows([]),
+      empty : false,
+      user : null,
     }
+    this.socket = this.props.socket;
+    _navigator = this.props.navigator;
+  }
+
+  componentDidMount() {
+    this._onFetch();
+    var self = this;
+    this.socket.on('listBroad', function (hasil){
+      console.log(hasil);
+      console.log('author ===> '+ self.state.user);
+      if (hasil.author == self.state.user) {
+        if (hasil.data.length != 0) {
+          self.setState({
+            dataSource : ds.cloneWithRows(hasil.data),
+            empty : false,
+          });
+        } else {
+          self.setState({
+            empty : true,
+          });
+        }
+      }
+    });
+  }
+
+  _onFetch () {
+    var self = this;
+    AsyncStorage.getItem('session', (err, result) => {
+      if (result != null ) {
+        var obj = JSON.parse(result);
+        this.setState({
+          user : obj._id
+        });
+        this.socket.emit('listBroad',{_id : obj._id});
+      }
+    });
   }
 
   eachMessage(x){
     return (
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress = {() => {
+          this.props.navigator.push({
+            id : 'broadcast',
+            cout : x.receiver.length,
+            receiver : x.receiver,
+            _id : x._id
+          });
+        }}
+        activeOpacity = {0.8}>
         <View style={{ alignItems:'center', padding:10, flexDirection:'row', borderBottomWidth:1, borderColor:'#f7f7f7' }}>
           {
             renderImages(x.image)
           }
           <View>
             <View style={{ flexDirection:'row', justifyContent:'space-between', width:260 }}>
-            <Text style={{ marginLeft:15, fontWeight:'600', color:'#222' }}>{x.first_name}'s Mom</Text>
+            <Text style={{ marginLeft:15, fontWeight:'600', color:'#222' }}>{x.receiver.toString()}</Text>
           </View>
-          <View style={{ flexDirection:'row', alignItems:'center' }}>
-            <Icon name="call-received" size={15} color="#ed788b" style={{ marginLeft:15, marginRight:5 }} />
+          <View style={{ flexDirection:'row', alignItems:'center', marginLeft:15, marginRight:5 }}>
             <Text style={{ fontWeight:'400', color:'#666', fontSize:12 }}>{x.date} {x.time}</Text></View>
           </View>
-          <Icon name="call" size={23} color='#777' style={{ marginRight:10 }} />
        </View>
      </TouchableOpacity>
     )
@@ -127,8 +113,39 @@ export default class Calls extends Component {
 
 
   render() {
+    var element;
+    if (!this.state.empty) {
+      element = (
+        <ListView
+          enableEmptySections={true}
+          dataSource={this.state.dataSource}
+          renderRow={(rowData) => this.eachMessage(rowData)}/>
+      );
+    } else {
+      element = (
+        <Empty
+          pesan = "Rescue Masih Kosong !!!"/>
+      );
+    }
     return (
       <View style={{ flex:1 }}>
+        {element}
+
+        <TouchableHighlight
+          onPress = {() => {
+            this.props.navigator.push({
+              id : 'rescue',
+            });
+          }}
+          underlayColor = "#ddd"
+          activeOpacity = {0.8}
+          style = {[styles.buttonFloat]}>
+            <Icon
+              name = {'plus'}
+              color = {'white'}
+              style = {styles.buttonIcon}
+              size = {25}/>
+        </TouchableHighlight>
       </View>
     );
   }
@@ -150,5 +167,21 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#333333',
     marginBottom: 5,
+  },
+  buttonFloat : {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: '#e74c3c',
+    // backgroundColor: '#0099CC',
+    position: 'absolute',
+    bottom : 25,
+    right: 10,
+  },
+  buttonIcon : {
+    marginTop : 19,
+    textAlign : 'center',
+    justifyContent : 'center',
+    fontWeight : 'normal'
   },
 });

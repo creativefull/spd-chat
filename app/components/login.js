@@ -34,6 +34,7 @@ export default class Login extends Component {
                   password : '',
                   username : ''
                 });
+                // self.props._onCheckSession();
                 self.props.navigator.push({
                   id : 'home',
                   title : ''
@@ -97,6 +98,12 @@ export default class Login extends Component {
                     <Text style={{fontSize: 20, color:'#FFF'}}>Sign In</Text>
                 </TouchableHighlight>
                 <TouchableHighlight
+                    onPress = {() => {
+                      this.props.navigator.push({
+                        id : 'register',
+                        title : 'Register'
+                      });
+                    }}
                     style={{marginTop: 10}}>
                     <Text style={{fontSize : 15, color: '#FAFAFA'}}>Create New Account</Text>
                 </TouchableHighlight>
