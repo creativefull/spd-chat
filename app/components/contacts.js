@@ -29,6 +29,7 @@ export default class Contacts extends Component {
 
     this.state = {
       dataSource: ds.cloneWithRows([]),
+      user : null,
     }
 
     this.socket = this.props.socket;
@@ -36,20 +37,19 @@ export default class Contacts extends Component {
 
   componentDidMount() {
     this._onFetch();
-  }
-
-  componentWillMount() {
     var self = this;
     this.socket.on('listContact', function (hasil){
-      if (hasil.length != 0) {
-        self.setState({
-          dataSource : ds.cloneWithRows(hasil),
-          empty : false,
-        });
-      } else {
-        self.setState({
-          empty : true,
-        });
+      if (hasil.author == self.state.user) {
+        if (hasil.data.length != 0) {
+          self.setState({
+            dataSource : ds.cloneWithRows(hasil.data),
+            empty : false,
+          });
+        } else {
+          self.setState({
+            empty : true,
+          });
+        }
       }
     });
   }
@@ -58,6 +58,9 @@ export default class Contacts extends Component {
     AsyncStorage.getItem('session', (err, result) => {
       if (result != null ) {
         var obj = JSON.parse(result);
+        this.setState({
+          user : obj._id
+        });
         this.socket.emit('listContact',{_id : obj._id});
       }
     });

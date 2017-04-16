@@ -54,7 +54,6 @@ export default class Calls extends Component {
     var self = this;
     this.socket.on('listBroad', function (hasil){
       console.log(hasil);
-      console.log('author ===> '+ self.state.user);
       if (hasil.author == self.state.user) {
         if (hasil.data.length != 0) {
           self.setState({

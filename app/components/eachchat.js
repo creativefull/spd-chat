@@ -41,6 +41,7 @@ export default class Chaty extends Component {
   constructor(props){
     super(props)
 
+    console.log(this.props);
     this.state = {
       receiver : this.props.receiver ? this.props.receiver : null,
       datasource: ds.cloneWithRows([]),
@@ -87,10 +88,6 @@ export default class Chaty extends Component {
         });
       }
     });
-  }
-
-  componentWillMount() {
-    // this.onRealTime();
   }
 
   _onFetch () {
@@ -144,11 +141,10 @@ export default class Chaty extends Component {
       var obj = {
         sender : sender,
         msg : note,
-        receiver : this.state.receiver
+        receiver : this.state.receiver,
       }
       var arr = this.state.arr;
-      arr.push(obj);
-      arr = arr.reverse();
+      arr.splice(0,0,obj);
       this.socket.emit('directMsg',obj);
       this.setState({
         note: '',
@@ -159,17 +155,18 @@ export default class Chaty extends Component {
   }
 
   render() {
-    const { image } = this.props;
     const { note } = this.state;
     return (
       <Image source={require('../images/background.jpg')} style={styles.container}>
         <View style={{ height:65, flexDirection:'row', justifyContent:'space-between', backgroundColor:'#075e54', alignItems:'center', paddingTop:10 }}>
           <View style={{ flexDirection:'row', flex:1, alignItems:'center' }}>
-            <TouchableOpacity onPress={() => this.props.navigator.pop()}>
+            <TouchableOpacity onPress={() => {
+              this.props.navigator.pop();
+            }}>
               <Icon name="navigate-before" color='#fff' size={23} style={{ }} />
             </TouchableOpacity>
             {
-              renderImages(image, iconStyle)
+              renderImages(1, iconStyle)
             }
             <Text style={{ color:'#fff', fontWeight:'600', margin:10, fontSize:15 }}>{this.props.name}</Text>
           </View>
@@ -187,7 +184,7 @@ export default class Chaty extends Component {
         style={{ flex:1, }}
         contentContainerStyle={{ justifyContent:'flex-end' }}
         dataSource={this.state.datasource}
-        renderRow={(rowData) => this.eachMessage(rowData, image)}/>
+        renderRow={(rowData) => this.eachMessage(rowData, 1)}/>
         
         <View style={{ alignSelf:'flex-end', padding:10, height:60, width:width, borderTopWidth:1, borderColor:'#f3f3f3', backgroundColor:'#fff' }}>
           <TextInput

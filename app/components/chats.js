@@ -25,37 +25,42 @@ export default class Chats extends Component {
     this.state = {
       dataSource: ds.cloneWithRows([]),
       empty : false,
+      user : null,
     }
     this.socket = this.props.socket;
   }
 
   componentDidMount() {
     this._onFetch();
-  }
-
-  componentWillMount() {
     var self = this;
-    // this._onFetch();
     this.socket.on('listChat', function (hasil){
-      if (hasil.length != 0) {
-        self.setState({
-          dataSource : ds.cloneWithRows(hasil),
-          empty : false,
-        });
-      } else {
-        self.setState({
-          empty : true
-        });
+      if (hasil.author == self.state.user) {
+        if (hasil.data.length != 0) {
+          self.setState({
+            dataSource : ds.cloneWithRows(hasil.data),
+            empty : false,
+          });
+        } else {
+          self.setState({
+            empty : true
+          });
+        }
       }
     });
   }
 
+  componentWillMount() {
+  }
+
   _onFetch () {
+    var self = this;
     AsyncStorage.getItem('session', (err, result) => {
       if (result != null ) {
         var obj = JSON.parse(result);
-        var self = this;
-        this.socket.emit('listChat',obj);
+        this.setState({
+          user : obj._id,
+        });
+        self.socket.emit('listChat',{_id :  obj._id});
       }
     });
   }
@@ -63,7 +68,7 @@ export default class Chats extends Component {
   eachMessage(x){
     var name = x.first_name+" "+ x.last_name;
     return (
-      <TouchableOpacity onPress ={() => {this.props.navigator.push({id:'chat', image:1, name: name , receiver : x._id}) }}>
+      <TouchableOpacity onPress ={() => {this.props.navigator.push({id:'chat', image:1, name: name , receiver : x._id }) }}>
         <View style={{ alignItems:'center', padding:10, flexDirection:'row', borderBottomWidth:1, borderColor:'#f7f7f7' }}>
           {
             renderImages(1)

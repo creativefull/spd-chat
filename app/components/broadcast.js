@@ -61,9 +61,6 @@ class Broadcast extends React.Component {
 
 	componentWillMount () {
 		let self = this;
-		// this.socket.on('getBroadMsg', function (hasil){
-			
-		// });
 	}
 
 	_onFetch () {
@@ -73,10 +70,6 @@ class Broadcast extends React.Component {
 				this.setState({
 					user : obj._id
 				});
-				// this.socket.emit('getBroadMsg',{
-				// 	sender : obj._id,
-				// 	_id : this.props._id
-				// });
 			}
 		});
 	}

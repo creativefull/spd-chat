@@ -182,11 +182,15 @@ class Rescue extends React.Component {
 									author : this.state.user,
 									receiver : this.state.arr
 								});
-								this.props.navigator.push({
-									id : 'broadcast',
-									cout : this.state.arr.length,
-									receiver : this.state.arr
-								});
+								let self = this;
+								this.socket.on('createBroadcast', function (rows){
+									self.props.navigator.push({
+										id : 'broadcast',
+										_id : rows._id,
+										cout : self.state.arr.length,
+										receiver : self.state.arr
+									});
+								})
 							} else {
 								ToastAndroid.show('minimal 2 contact di pilih ', ToastAndroid.SHORT);
 							}
