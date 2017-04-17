@@ -9,7 +9,8 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  AsyncStorage
 } from 'react-native';
 import Calls from './calls'
 import Chats from './chats'
@@ -19,6 +20,12 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import Menu, { MenuContext, MenuOptions, MenuOption, MenuTrigger } from 'react-native-menu';
 
 export default class ThreePanels extends Component {
+
+  constructor(props) {
+    super(props);
+  
+    this.state = {};
+  }
 
   _onLogout () {
     console.log('tes');

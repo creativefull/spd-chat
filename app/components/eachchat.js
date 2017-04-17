@@ -33,6 +33,8 @@ BackAndroid.addEventListener('hardwareBackPress', () => {
   if (_navigator.getCurrentRoutes().length === 1  ) {
     return false;
   }
+  
+  socket.emit('listChat', { _id : this.state.user});
   _navigator.pop();
   return true;
 });
@@ -49,20 +51,28 @@ export default class Chaty extends Component {
       arr : []
     }
     _navigator = this.props.navigator;
-    this.socket = this.props.socket;
+    socket = this.props.socket;
+
+    this._onFetch = this._onFetch.bind(this);
+    this.onChange = this.onChange.bind(this);
+  }
+
+  onChange (rows) {
+    this.setState({
+      datasource : ds.cloneWithRows(rows),
+      arr : rows
+    });
   }
 
   componentDidMount() {
-    this._mounted = true;
-    var self = this;
+    let self = this;
     this._onFetch();
-    this.socket.on('getDirectMsg', function (hasil){
+    socket.on('getDirectMsg', function (hasil){
       let sender = self.state.user;
       if (sender == hasil.sender || sender == hasil.receiver) {
-        self.setState({
-          datasource : ds.cloneWithRows(hasil.data),
-          arr : hasil.data
-        });
+        if (!self._calledComponentWillUnmount) {
+          self.onChange(hasil.data);
+        }
       }
     });
 
@@ -70,16 +80,19 @@ export default class Chaty extends Component {
   }
 
   componentWillUnmount() {
-    this._mounted = false;
+    this.setState({
+      note : null,
+      user : null,
+      arr : [],
+      datasource : ds.cloneWithRows([])
+    });
   }
 
   onRealTime () {
     var self = this;
-    this.socket.on('directMsg', function (obj){
-      // console.log(obj);
+    socket.on('directMsg', function (obj){
       let arr = self.state.arr;
       if (obj.data.receiver == self.state.user) {
-        // arr.push(obj.data);
         arr.splice(0,0,obj.data);
         self.setState({
           arr : arr,
@@ -87,10 +100,6 @@ export default class Chaty extends Component {
         });
       }
     });
-  }
-
-  componentWillMount() {
-    // this.onRealTime();
   }
 
   _onFetch () {
@@ -104,7 +113,7 @@ export default class Chaty extends Component {
         this.setState({
           user : obj._id
         });
-        this.socket.emit('getDirectMsg',data);
+        socket.emit('getDirectMsg',data);
       }
     });
   }
@@ -144,12 +153,11 @@ export default class Chaty extends Component {
       var obj = {
         sender : sender,
         msg : note,
-        receiver : this.state.receiver
+        receiver : this.state.receiver,
       }
       var arr = this.state.arr;
-      arr.push(obj);
-      arr = arr.reverse();
-      this.socket.emit('directMsg',obj);
+      arr.splice(0,0,obj);
+      socket.emit('directMsg',obj);
       this.setState({
         note: '',
         arr : arr,
@@ -159,17 +167,19 @@ export default class Chaty extends Component {
   }
 
   render() {
-    const { image } = this.props;
     const { note } = this.state;
     return (
       <Image source={require('../images/background.jpg')} style={styles.container}>
         <View style={{ height:65, flexDirection:'row', justifyContent:'space-between', backgroundColor:'#075e54', alignItems:'center', paddingTop:10 }}>
           <View style={{ flexDirection:'row', flex:1, alignItems:'center' }}>
-            <TouchableOpacity onPress={() => this.props.navigator.pop()}>
+            <TouchableOpacity onPress={() => {
+              socket.emit('listChat', { _id : this.state.user});
+              this.props.navigator.pop();
+            }}>
               <Icon name="navigate-before" color='#fff' size={23} style={{ }} />
             </TouchableOpacity>
             {
-              renderImages(image, iconStyle)
+              renderImages(1, iconStyle)
             }
             <Text style={{ color:'#fff', fontWeight:'600', margin:10, fontSize:15 }}>{this.props.name}</Text>
           </View>
@@ -187,7 +197,7 @@ export default class Chaty extends Component {
         style={{ flex:1, }}
         contentContainerStyle={{ justifyContent:'flex-end' }}
         dataSource={this.state.datasource}
-        renderRow={(rowData) => this.eachMessage(rowData, image)}/>
+        renderRow={(rowData) => this.eachMessage(rowData, 1)}/>
         
         <View style={{ alignSelf:'flex-end', padding:10, height:60, width:width, borderTopWidth:1, borderColor:'#f3f3f3', backgroundColor:'#fff' }}>
           <TextInput

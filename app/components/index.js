@@ -137,6 +137,7 @@ export default class Index extends Component {
           cout = {route.cout}
           arr_receiver = {route.receiver}
           _id = {route._id}
+          referal = {route.referal}
           navigator = {navigator}/>
       );
     }

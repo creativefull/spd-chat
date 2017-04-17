@@ -53,8 +53,6 @@ export default class Calls extends Component {
     this._onFetch();
     var self = this;
     this.socket.on('listBroad', function (hasil){
-      console.log(hasil);
-      console.log('author ===> '+ self.state.user);
       if (hasil.author == self.state.user) {
         if (hasil.data.length != 0) {
           self.setState({
@@ -104,7 +102,7 @@ export default class Calls extends Component {
             <Text style={{ marginLeft:15, fontWeight:'600', color:'#222' }}>{x.receiver.toString()}</Text>
           </View>
           <View style={{ flexDirection:'row', alignItems:'center', marginLeft:15, marginRight:5 }}>
-            <Text style={{ fontWeight:'400', color:'#666', fontSize:12 }}>{x.date} {x.time}</Text></View>
+            <Text style={{ fontWeight:'400', color:'#666', fontSize:12 }}>{x.messages}</Text></View>
           </View>
        </View>
      </TouchableOpacity>

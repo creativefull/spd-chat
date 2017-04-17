@@ -67,34 +67,60 @@ class Rescue extends React.Component {
 		super(props);
 
 		this.state = {
-			dataSource: ds.cloneWithRows(data),
+			dataSource: ds.cloneWithRows([]),
 			empty : false,
 			arr : [],
 			jumlah : 0,
 			user : ''
 		};
+
 		this.socket = this.props.socket;
 		_navigator = this.props.navigator;
 	}
 
 	componentDidMount() {
 		this._onFetch();
-	}
-
-	componentWillMount() {
 		var self = this;
 		this.socket.on('listContact', function (hasil){
-			if (hasil.length != 0) {
-				self.setState({
-					jumlah : hasil.length,
-					dataSource : ds.cloneWithRows(hasil),
-					empty : false,
-				});
-			} else {
-				self.setState({
-					empty : true,
+			if (!self._calledComponentWillUnmount) {
+				if (hasil.data.length != 0 && hasil.author == self.state.user) {
+					self.setState({
+						jumlah : hasil.data.length,
+						dataSource : ds.cloneWithRows(hasil.data),
+						empty : false,
+					});
+				} else {
+					self.setState({
+						empty : true,
+					});
+				}
+			}
+		});
+	}
+
+	componentWillMount () {
+		let self = this;
+		var no = 0;
+		this.socket.on('createBroadcast', function (rows){
+			if (no == 0) {
+				self.props.navigator.push({
+					id : 'broadcast',
+					_id : rows._id,
+					cout : self.state.arr.length,
+					receiver : self.state.arr,
+					referal : 'rescue'
 				});
 			}
+			no = no + 1;
+		});
+	}
+
+	componentWillUnmount() {
+		this.setState({
+		  arr : [],
+		  dataSource : ds.cloneWithRows([]),
+		  jumlah : 0,
+		  user : ''
 		});
 	}
 
@@ -143,7 +169,7 @@ class Rescue extends React.Component {
 					{ renderImages(1)}
 					<View>
 						<View style={{ flexDirection:'row', justifyContent:'space-between', width:280 }}>
-							<Text style={{ marginLeft:15, fontWeight:'600' }}>{x.first_name}</Text>
+							<Text style={{ marginLeft:15, fontWeight:'600' }}>{x._id}</Text>
 						</View>
 						<View style={{ flexDirection:'row', alignItems:'center' }}>
 							<Text style={{ fontWeight:'400', color:'#333', marginLeft:15 }}>{x.time}</Text>
@@ -170,21 +196,18 @@ class Rescue extends React.Component {
 								<Text style = {{color:'#fff', fontSize:15}} >{this.state.arr.length} of {this.state.jumlah} selected</Text>
 						</View>
 					</View>
+
 					<ListView
 						enableEmptySections={true}
 						dataSource={this.state.dataSource}
 						renderRow={(rowData) => this._renderRow(rowData)}/>
+
 					<TouchableHighlight
 						onPress = {() => {
 							let receiver = this.state.arr;
 							if (receiver.length != 0 ) {
 								this.socket.emit('createBroadcast',{
 									author : this.state.user,
-									receiver : this.state.arr
-								});
-								this.props.navigator.push({
-									id : 'broadcast',
-									cout : this.state.arr.length,
 									receiver : this.state.arr
 								});
 							} else {
