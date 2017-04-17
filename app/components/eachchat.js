@@ -41,7 +41,6 @@ export default class Chaty extends Component {
   constructor(props){
     super(props)
 
-    console.log(this.props);
     this.state = {
       receiver : this.props.receiver ? this.props.receiver : null,
       datasource: ds.cloneWithRows([]),
@@ -51,19 +50,27 @@ export default class Chaty extends Component {
     }
     _navigator = this.props.navigator;
     this.socket = this.props.socket;
+
+    this._onFetch = this._onFetch.bind(this);
+    this.onChange = this.onChange.bind(this);
+  }
+
+  onChange (rows) {
+    this.setState({
+      datasource : ds.cloneWithRows(rows),
+      arr : rows
+    });
   }
 
   componentDidMount() {
-    this._mounted = true;
-    var self = this;
+    let self = this;
     this._onFetch();
     this.socket.on('getDirectMsg', function (hasil){
       let sender = self.state.user;
       if (sender == hasil.sender || sender == hasil.receiver) {
-        self.setState({
-          datasource : ds.cloneWithRows(hasil.data),
-          arr : hasil.data
-        });
+        if (!self._calledComponentWillUnmount) {
+          self.onChange(hasil.data);
+        }
       }
     });
 
@@ -71,16 +78,17 @@ export default class Chaty extends Component {
   }
 
   componentWillUnmount() {
-    this._mounted = false;
+    this.setState({
+      arr : [],
+      datasource : ds.cloneWithRows([])
+    });
   }
 
   onRealTime () {
     var self = this;
     this.socket.on('directMsg', function (obj){
-      // console.log(obj);
       let arr = self.state.arr;
       if (obj.data.receiver == self.state.user) {
-        // arr.push(obj.data);
         arr.splice(0,0,obj.data);
         self.setState({
           arr : arr,
@@ -161,6 +169,7 @@ export default class Chaty extends Component {
         <View style={{ height:65, flexDirection:'row', justifyContent:'space-between', backgroundColor:'#075e54', alignItems:'center', paddingTop:10 }}>
           <View style={{ flexDirection:'row', flex:1, alignItems:'center' }}>
             <TouchableOpacity onPress={() => {
+              this.socket.emit('listChat', { _id : this.state.user})
               this.props.navigator.pop();
             }}>
               <Icon name="navigate-before" color='#fff' size={23} style={{ }} />

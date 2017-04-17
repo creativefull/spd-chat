@@ -24,37 +24,11 @@ export default class ThreePanels extends Component {
   constructor(props) {
     super(props);
   
-    this.state = {
-      user : null
-    };
-    this.socket = this.props.socket;
+    this.state = {};
   }
 
   _onLogout () {
     console.log('tes');
-  }
-
-  componentDidMount () {
-    AsyncStorage.getItem('session', (err, result) => {
-      if (result != null ) {
-        var obj = JSON.parse(result);
-        this.setState({
-          user : obj._id,
-        });
-      }
-    });
-  }
-
-  _onFetch () {
-    AsyncStorage.getItem('session', (err, result) => {
-      if (result != null ) {
-        var obj = JSON.parse(result);
-        this.setState({
-          user : obj._id,
-        });
-        this.socket.emit('listChat',obj);
-      }
-    });
   }
 
   render() {
@@ -86,8 +60,8 @@ export default class ThreePanels extends Component {
           tabBarActiveTextColor="#fff"
           tabBarInactiveTextColor="#88b0ac">
           <Calls tabLabel="RESCUE" {...this.props}/>
-          <Chats user = {this.state.user} tabLabel="CHAT" {...this.props} />
-          <Contacts _onFetch = {this._onFetch} user = {this.state.user} tabLabel="CONTACTS" {...this.props}/>
+          <Chats tabLabel="CHAT" {...this.props} />
+          <Contacts tabLabel="CONTACTS" {...this.props}/>
         </ScrollableTabView>
       </View>
     );
