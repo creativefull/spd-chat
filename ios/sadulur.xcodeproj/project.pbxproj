@@ -11,7 +11,7 @@
 		00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302C01ABCB91800DB3ED1 /* libRCTImage.a */; };
 		00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302DC1ABCB9D200DB3ED1 /* libRCTNetwork.a */; };
 		00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
-		00E356F31AD99517003FC87E /* sedulurTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* sedulurTests.m */; };
+		00E356F31AD99517003FC87E /* sadulurTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* sadulurTests.m */; };
 		133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C398B91ACF4ADC00677621 /* libRCTLinking.a */; };
 		139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
 		139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
@@ -23,16 +23,15 @@
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		C851C5EF53D74FDA8B1A82F3 /* libSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0634065273D344A6BF3BA4C6 /* libSplashScreen.a */; };
-		2512E98CD5624F0EA170340F /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D7AE3DEA09C462690A5B053 /* libRNVectorIcons.a */; };
-		3B2AA432600D4319AA7135F7 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22E19CD5365448D6846894EE /* Entypo.ttf */; };
-		58FD802D2ACE4D2B93B6F379 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E87E319537B8419890DAD5DC /* EvilIcons.ttf */; };
-		FB009C37F4D6424EB8383823 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 286ED36DC6BF4784BA5276A9 /* FontAwesome.ttf */; };
-		EE411D21FF3C49E18F7CDC50 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4C021F5481EC45A789FA2998 /* Foundation.ttf */; };
-		509662D2421243DEBEA3DBCA /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84E8DC4C32FB418ABCF9BF6A /* Ionicons.ttf */; };
-		CF508AC655DA4F80B9DF6961 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 119FBB8EABCF48EDA7E5A60C /* MaterialIcons.ttf */; };
-		EB90C747B9CC46C7B210A99D /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 55565095BA48490BAB9A7E04 /* Octicons.ttf */; };
-		7FF04C122A62452F99AC2D11 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4CE0A2D8D2774A07A2E9E39E /* Zocial.ttf */; };
+		43DA5C7EF73941B18447A978 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A82F9A5A5D74292B41889B2 /* libRNVectorIcons.a */; };
+		596BA120FFED4E24A2700650 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 901FEC73FFB745C38C39BE23 /* Entypo.ttf */; };
+		5D27A12EB4FB4801B6D5DF9B /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C3E69C7C25E741A680732284 /* EvilIcons.ttf */; };
+		902E78F0CE384ED08C23ED9C /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 34579FBC859B427AAA5352AB /* FontAwesome.ttf */; };
+		432421305D0E478084E0CA0E /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B0DE48E08E2A4394A3199CE5 /* Foundation.ttf */; };
+		DDE6EC201FFD44D384D69E90 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4DA120100BA04FC8894943AC /* Ionicons.ttf */; };
+		4586E9CBB3A445A187ED70D7 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6983FFE53BCE4E6DA3C357E0 /* MaterialIcons.ttf */; };
+		6E99A68D34944517AB9DD1B9 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3338190CB4F8417CB542E9E3 /* Octicons.ttf */; };
+		3AFE96A49310469C905BE0FC /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB9DE127B9A2418992CB4CCB /* Zocial.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,7 +75,7 @@
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = sedulur;
+			remoteInfo = sadulur;
 		};
 		139105C01AF99BAD00B5F7CC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -227,34 +226,32 @@
 		00C302BB1ABCB91800DB3ED1 /* RCTImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTImage.xcodeproj; path = "../node_modules/react-native/Libraries/Image/RCTImage.xcodeproj"; sourceTree = "<group>"; };
 		00C302D31ABCB9D200DB3ED1 /* RCTNetwork.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTNetwork.xcodeproj; path = "../node_modules/react-native/Libraries/Network/RCTNetwork.xcodeproj"; sourceTree = "<group>"; };
 		00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTVibration.xcodeproj; path = "../node_modules/react-native/Libraries/Vibration/RCTVibration.xcodeproj"; sourceTree = "<group>"; };
-		00E356EE1AD99517003FC87E /* sedulurTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sedulurTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356EE1AD99517003FC87E /* sadulurTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sadulurTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* sedulurTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = sedulurTests.m; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* sadulurTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = sadulurTests.m; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* sedulur.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sedulur.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = sedulur/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = sedulur/AppDelegate.m; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* sadulur.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sadulur.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = sadulur/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = sadulur/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = sedulur/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = sedulur/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = sedulur/main.m; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = sadulur/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = sadulur/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = sadulur/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
-		CF821CB5400B409B84D1B1B0 /* SplashScreen.xcodeproj */ = {isa = PBXFileReference; name = "SplashScreen.xcodeproj"; path = "../node_modules/react-native-splash-screen/ios/SplashScreen.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		0634065273D344A6BF3BA4C6 /* libSplashScreen.a */ = {isa = PBXFileReference; name = "libSplashScreen.a"; path = "libSplashScreen.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
-		42240A61B00E47ADBA2D964D /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; name = "RNVectorIcons.xcodeproj"; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		1D7AE3DEA09C462690A5B053 /* libRNVectorIcons.a */ = {isa = PBXFileReference; name = "libRNVectorIcons.a"; path = "libRNVectorIcons.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
-		22E19CD5365448D6846894EE /* Entypo.ttf */ = {isa = PBXFileReference; name = "Entypo.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		E87E319537B8419890DAD5DC /* EvilIcons.ttf */ = {isa = PBXFileReference; name = "EvilIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		286ED36DC6BF4784BA5276A9 /* FontAwesome.ttf */ = {isa = PBXFileReference; name = "FontAwesome.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		4C021F5481EC45A789FA2998 /* Foundation.ttf */ = {isa = PBXFileReference; name = "Foundation.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		84E8DC4C32FB418ABCF9BF6A /* Ionicons.ttf */ = {isa = PBXFileReference; name = "Ionicons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		119FBB8EABCF48EDA7E5A60C /* MaterialIcons.ttf */ = {isa = PBXFileReference; name = "MaterialIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		55565095BA48490BAB9A7E04 /* Octicons.ttf */ = {isa = PBXFileReference; name = "Octicons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		4CE0A2D8D2774A07A2E9E39E /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		075ED5325BF54E4BACEEB11F /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; name = "RNVectorIcons.xcodeproj"; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		7A82F9A5A5D74292B41889B2 /* libRNVectorIcons.a */ = {isa = PBXFileReference; name = "libRNVectorIcons.a"; path = "libRNVectorIcons.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		901FEC73FFB745C38C39BE23 /* Entypo.ttf */ = {isa = PBXFileReference; name = "Entypo.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C3E69C7C25E741A680732284 /* EvilIcons.ttf */ = {isa = PBXFileReference; name = "EvilIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		34579FBC859B427AAA5352AB /* FontAwesome.ttf */ = {isa = PBXFileReference; name = "FontAwesome.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B0DE48E08E2A4394A3199CE5 /* Foundation.ttf */ = {isa = PBXFileReference; name = "Foundation.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4DA120100BA04FC8894943AC /* Ionicons.ttf */ = {isa = PBXFileReference; name = "Ionicons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6983FFE53BCE4E6DA3C357E0 /* MaterialIcons.ttf */ = {isa = PBXFileReference; name = "MaterialIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3338190CB4F8417CB542E9E3 /* Octicons.ttf */ = {isa = PBXFileReference; name = "Octicons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		EB9DE127B9A2418992CB4CCB /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -281,8 +278,7 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
-				C851C5EF53D74FDA8B1A82F3 /* libSplashScreen.a in Frameworks */,
-				2512E98CD5624F0EA170340F /* libRNVectorIcons.a in Frameworks */,
+				43DA5C7EF73941B18447A978 /* libRNVectorIcons.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,13 +327,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		00E356EF1AD99517003FC87E /* sedulurTests */ = {
+		00E356EF1AD99517003FC87E /* sadulurTests */ = {
 			isa = PBXGroup;
 			children = (
-				00E356F21AD99517003FC87E /* sedulurTests.m */,
+				00E356F21AD99517003FC87E /* sadulurTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
-			path = sedulurTests;
+			path = sadulurTests;
 			sourceTree = "<group>";
 		};
 		00E356F01AD99517003FC87E /* Supporting Files */ = {
@@ -366,7 +362,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		13B07FAE1A68108700A75B9A /* sedulur */ = {
+		13B07FAE1A68108700A75B9A /* sadulur */ = {
 			isa = PBXGroup;
 			children = (
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
@@ -377,7 +373,7 @@
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
-			name = sedulur;
+			name = sadulur;
 			sourceTree = "<group>";
 		};
 		146834001AC3E56700842450 /* Products */ = {
@@ -427,8 +423,7 @@
 				832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */,
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
-				CF821CB5400B409B84D1B1B0 /* SplashScreen.xcodeproj */,
-				42240A61B00E47ADBA2D964D /* RNVectorIcons.xcodeproj */,
+				075ED5325BF54E4BACEEB11F /* RNVectorIcons.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -445,11 +440,11 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				13B07FAE1A68108700A75B9A /* sedulur */,
+				13B07FAE1A68108700A75B9A /* sadulur */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				00E356EF1AD99517003FC87E /* sedulurTests */,
+				00E356EF1AD99517003FC87E /* sadulurTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
-				D40D902401FC46A09773C91D /* Resources */,
+				C0723F00304144C1AEF9BF60 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -458,23 +453,23 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* sedulur.app */,
-				00E356EE1AD99517003FC87E /* sedulurTests.xctest */,
+				13B07F961A680F5B00A75B9A /* sadulur.app */,
+				00E356EE1AD99517003FC87E /* sadulurTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D40D902401FC46A09773C91D /* Resources */ = {
+		C0723F00304144C1AEF9BF60 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				22E19CD5365448D6846894EE /* Entypo.ttf */,
-				E87E319537B8419890DAD5DC /* EvilIcons.ttf */,
-				286ED36DC6BF4784BA5276A9 /* FontAwesome.ttf */,
-				4C021F5481EC45A789FA2998 /* Foundation.ttf */,
-				84E8DC4C32FB418ABCF9BF6A /* Ionicons.ttf */,
-				119FBB8EABCF48EDA7E5A60C /* MaterialIcons.ttf */,
-				55565095BA48490BAB9A7E04 /* Octicons.ttf */,
-				4CE0A2D8D2774A07A2E9E39E /* Zocial.ttf */,
+				901FEC73FFB745C38C39BE23 /* Entypo.ttf */,
+				C3E69C7C25E741A680732284 /* EvilIcons.ttf */,
+				34579FBC859B427AAA5352AB /* FontAwesome.ttf */,
+				B0DE48E08E2A4394A3199CE5 /* Foundation.ttf */,
+				4DA120100BA04FC8894943AC /* Ionicons.ttf */,
+				6983FFE53BCE4E6DA3C357E0 /* MaterialIcons.ttf */,
+				3338190CB4F8417CB542E9E3 /* Octicons.ttf */,
+				EB9DE127B9A2418992CB4CCB /* Zocial.ttf */,
 			);
 			name = Resources;
 			path = "";
@@ -483,9 +478,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		00E356ED1AD99517003FC87E /* sedulurTests */ = {
+		00E356ED1AD99517003FC87E /* sadulurTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "sedulurTests" */;
+			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "sadulurTests" */;
 			buildPhases = (
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
@@ -496,14 +491,14 @@
 			dependencies = (
 				00E356F51AD99517003FC87E /* PBXTargetDependency */,
 			);
-			name = sedulurTests;
-			productName = sedulurTests;
-			productReference = 00E356EE1AD99517003FC87E /* sedulurTests.xctest */;
+			name = sadulurTests;
+			productName = sadulurTests;
+			productReference = 00E356EE1AD99517003FC87E /* sadulurTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		13B07F861A680F5B00A75B9A /* sedulur */ = {
+		13B07F861A680F5B00A75B9A /* sadulur */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "sedulur" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "sadulur" */;
 			buildPhases = (
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
@@ -514,9 +509,9 @@
 			);
 			dependencies = (
 			);
-			name = sedulur;
+			name = sadulur;
 			productName = "Hello World";
-			productReference = 13B07F961A680F5B00A75B9A /* sedulur.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* sadulur.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -534,7 +529,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "sedulur" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "sadulur" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -593,8 +588,8 @@
 			);
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* sedulur */,
-				00E356ED1AD99517003FC87E /* sedulurTests */,
+				13B07F861A680F5B00A75B9A /* sadulur */,
+				00E356ED1AD99517003FC87E /* sadulurTests */,
 			);
 		};
 /* End PBXProject section */
@@ -791,14 +786,14 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				3B2AA432600D4319AA7135F7 /* Entypo.ttf in Resources */,
-				58FD802D2ACE4D2B93B6F379 /* EvilIcons.ttf in Resources */,
-				FB009C37F4D6424EB8383823 /* FontAwesome.ttf in Resources */,
-				EE411D21FF3C49E18F7CDC50 /* Foundation.ttf in Resources */,
-				509662D2421243DEBEA3DBCA /* Ionicons.ttf in Resources */,
-				CF508AC655DA4F80B9DF6961 /* MaterialIcons.ttf in Resources */,
-				EB90C747B9CC46C7B210A99D /* Octicons.ttf in Resources */,
-				7FF04C122A62452F99AC2D11 /* Zocial.ttf in Resources */,
+				596BA120FFED4E24A2700650 /* Entypo.ttf in Resources */,
+				5D27A12EB4FB4801B6D5DF9B /* EvilIcons.ttf in Resources */,
+				902E78F0CE384ED08C23ED9C /* FontAwesome.ttf in Resources */,
+				432421305D0E478084E0CA0E /* Foundation.ttf in Resources */,
+				DDE6EC201FFD44D384D69E90 /* Ionicons.ttf in Resources */,
+				4586E9CBB3A445A187ED70D7 /* MaterialIcons.ttf in Resources */,
+				6E99A68D34944517AB9DD1B9 /* Octicons.ttf in Resources */,
+				3AFE96A49310469C905BE0FC /* Zocial.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -826,7 +821,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00E356F31AD99517003FC87E /* sedulurTests.m in Sources */,
+				00E356F31AD99517003FC87E /* sadulurTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -844,7 +839,7 @@
 /* Begin PBXTargetDependency section */
 		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* sedulur */;
+			target = 13B07F861A680F5B00A75B9A /* sadulur */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -856,7 +851,7 @@
 				13B07FB21A68108700A75B9A /* Base */,
 			);
 			name = LaunchScreen.xib;
-			path = sedulur;
+			path = sadulur;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -870,14 +865,13 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = sedulurTests/Info.plist;
+				INFOPLIST_FILE = sadulurTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/sedulur.app/sedulur";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/sadulur.app/sadulur";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
@@ -888,14 +882,13 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				INFOPLIST_FILE = sedulurTests/Info.plist;
+				INFOPLIST_FILE = sadulurTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/sedulur.app/sedulur";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/sadulur.app/sadulur";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
@@ -907,14 +900,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				INFOPLIST_FILE = sedulur/Info.plist;
+				INFOPLIST_FILE = sadulur/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_NAME = sedulur;
+				PRODUCT_NAME = sadulur;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -924,14 +917,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
-				INFOPLIST_FILE = sedulur/Info.plist;
+				INFOPLIST_FILE = sadulur/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_NAME = sedulur;
+				PRODUCT_NAME = sadulur;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -1015,7 +1008,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "sedulurTests" */ = {
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "sadulurTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
@@ -1024,7 +1017,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "sedulur" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "sadulur" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -1033,7 +1026,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "sedulur" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "sadulur" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,

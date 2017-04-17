@@ -28,7 +28,7 @@ export default class ThreePanels extends Component {
     return (
       <View style={{ flex:1 }}>
         <View style ={styles.topBit}>
-          <Text style={styles.logo}>Sedulur</Text>
+          <Text style={styles.logo}>Sadulur</Text>
           <View style={styles.row}>
             <Icon name = "search" color = '#fff' size = {23} style = {{ padding:5 }} />
             <Icon name = "chat" color = '#fff' size = {23} style = {{ padding:5 }} />
@@ -49,7 +49,7 @@ export default class ThreePanels extends Component {
         </View>
         <ScrollableTabView
           tabBarUnderlineColor="#fff"
-          tabBarBackgroundColor ='#075e54'
+          tabBarBackgroundColor ='#2980B9'
           tabBarActiveTextColor="#fff"
           tabBarInactiveTextColor="#88b0ac">
           <Calls tabLabel="RESCUE" {...this.props}/>
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     alignItems:'center',
     paddingTop:15,
-    backgroundColor:'#075e54',
+    backgroundColor:'#2980B9',
     justifyContent:'space-between'
   }
 });
