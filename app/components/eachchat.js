@@ -33,6 +33,8 @@ BackAndroid.addEventListener('hardwareBackPress', () => {
   if (_navigator.getCurrentRoutes().length === 1  ) {
     return false;
   }
+  
+  socket.emit('listChat', { _id : this.state.user});
   _navigator.pop();
   return true;
 });
@@ -49,7 +51,7 @@ export default class Chaty extends Component {
       arr : []
     }
     _navigator = this.props.navigator;
-    this.socket = this.props.socket;
+    socket = this.props.socket;
 
     this._onFetch = this._onFetch.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -65,7 +67,7 @@ export default class Chaty extends Component {
   componentDidMount() {
     let self = this;
     this._onFetch();
-    this.socket.on('getDirectMsg', function (hasil){
+    socket.on('getDirectMsg', function (hasil){
       let sender = self.state.user;
       if (sender == hasil.sender || sender == hasil.receiver) {
         if (!self._calledComponentWillUnmount) {
@@ -79,6 +81,8 @@ export default class Chaty extends Component {
 
   componentWillUnmount() {
     this.setState({
+      note : null,
+      user : null,
       arr : [],
       datasource : ds.cloneWithRows([])
     });
@@ -86,7 +90,7 @@ export default class Chaty extends Component {
 
   onRealTime () {
     var self = this;
-    this.socket.on('directMsg', function (obj){
+    socket.on('directMsg', function (obj){
       let arr = self.state.arr;
       if (obj.data.receiver == self.state.user) {
         arr.splice(0,0,obj.data);
@@ -109,7 +113,7 @@ export default class Chaty extends Component {
         this.setState({
           user : obj._id
         });
-        this.socket.emit('getDirectMsg',data);
+        socket.emit('getDirectMsg',data);
       }
     });
   }
@@ -153,7 +157,7 @@ export default class Chaty extends Component {
       }
       var arr = this.state.arr;
       arr.splice(0,0,obj);
-      this.socket.emit('directMsg',obj);
+      socket.emit('directMsg',obj);
       this.setState({
         note: '',
         arr : arr,
@@ -169,7 +173,7 @@ export default class Chaty extends Component {
         <View style={{ height:65, flexDirection:'row', justifyContent:'space-between', backgroundColor:'#075e54', alignItems:'center', paddingTop:10 }}>
           <View style={{ flexDirection:'row', flex:1, alignItems:'center' }}>
             <TouchableOpacity onPress={() => {
-              this.socket.emit('listChat', { _id : this.state.user})
+              socket.emit('listChat', { _id : this.state.user});
               this.props.navigator.pop();
             }}>
               <Icon name="navigate-before" color='#fff' size={23} style={{ }} />

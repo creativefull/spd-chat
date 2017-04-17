@@ -76,7 +76,7 @@ export default class Contacts extends Component {
           <Image source={require('../images/eminem.jpg')} style={{ borderRadius:30, width:60, height:60 }} resizeMode='contain' />
           <View>
             <View style={{ flexDirection:'row', justifyContent:'space-between', width:280 }}>
-              <Text style={{ marginLeft:15, fontWeight:'600', color:'#222', fontSize:15 }}>{x.first_name} {x.last_name}</Text>
+              <Text style={{ marginLeft:15, fontWeight:'600', color:'#222', fontSize:15 }}>{x._id}</Text>
               <Text style={{ fontWeight:'200', color:'#777', fontSize:13 }}>MOBILE</Text>
             </View>
             <View style={{ flexDirection:'row', alignItems:'center' }}>

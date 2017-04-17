@@ -14,11 +14,12 @@ import {
 } from 'react-native';
 
 BackAndroid.addEventListener('hardwareBackPress', () => {
-  if (_navigator.getCurrentRoutes().length === 1  ) {
-    return false;
-  }
-  _navigator.pop();
-  return true;
+	if (_navigator.getCurrentRoutes().length === 1  ) {
+		return false;
+	}
+
+	_navigator.pop();
+	return true;
 });
 
 const iconStyle = { width:30, height:30, borderRadius:15, margin:5 };
@@ -51,16 +52,34 @@ class Broadcast extends React.Component {
 			note : '',
 			user : null,
 		};
-		this.socket = this.props.socket;
+
+		socket = this.props.socket;
 		_navigator = this.props.navigator;
 	}
 
 	componentDidMount() {
+		let self = this;
 		this._onFetch();
+		socket.on('getBroadMsg', function (hasil){
+			let sender = self.state.user;
+			if (!self._calledComponentWillUnmount) {
+				if (sender == hasil.sender && self.props._id == hasil._id ) {
+					self.setState({
+						dataSource : ds.cloneWithRows(hasil.data),
+						arr : hasil.data
+					});
+				}
+			}
+		});
 	}
 
-	componentWillMount () {
-		let self = this;
+	componentWillUnmount () {
+		this.setState({
+			arr : [],
+			dataSource : ds.cloneWithRows([]),
+			user : null,
+			note : ''
+		});
 	}
 
 	_onFetch () {
@@ -70,6 +89,7 @@ class Broadcast extends React.Component {
 				this.setState({
 					user : obj._id
 				});
+				socket.emit('getBroadMsg', { _id : obj._id, id : this.props._id});
 			}
 		});
 	}
@@ -78,16 +98,15 @@ class Broadcast extends React.Component {
 		let sender = this.state.user;
 		let note = this.state.note;
 		if (note != '') {
-			let arr = this.state.arr;
 			let obj = {
 				sender : sender,
 				msg : note,
 				receiver : this.props.arr_receiver,
 				_id : this.props._id
 			}
-			this.socket.emit('broadMsg',obj);
-			arr.push(obj);
-			arr = arr.reverse();
+			socket.emit('broadMsg',obj);
+			let arr = this.state.arr;
+			arr.splice(0,0,obj);
 			this.setState({
 				note: '',
 				arr : arr,
@@ -128,7 +147,14 @@ class Broadcast extends React.Component {
 			<Image source={require('../images/background.jpg')} style={styles.container}>
 				<View style={{ height:65, flexDirection:'row', justifyContent:'space-between', backgroundColor:'#075e54', alignItems:'center', paddingTop:10 }}>
 					<View style={{ flexDirection:'row', flex:1, alignItems:'center' }}>
-						<TouchableOpacity onPress={() => this.props.navigator.pop()}>
+						<TouchableOpacity onPress={() => {
+							socket.emit('listBroad',{ _id : this.state.user});
+							if (this.props.referal) {
+								this.props.navigator.popN(2);
+							} else {
+								this.props.navigator.pop();
+							}
+						}}>
 							<Icon name="navigate-before" color='#fff' size={23} style={{ }} />
 						</TouchableOpacity>
 						<Text style={{ color:'#fff', fontWeight:'600', margin:10, fontSize:15 }}>{this.props.cout} recipients</Text>

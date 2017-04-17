@@ -52,6 +52,14 @@ export default class Chats extends Component {
   componentWillMount() {
   }
 
+  componentWillUnmount() {
+    this.setState({
+      dataSource : ds.cloneWithRows([]),
+      empty : false,
+      user : null
+    });
+  }
+
   _onFetch () {
     var self = this;
     AsyncStorage.getItem('session', (err, result) => {
