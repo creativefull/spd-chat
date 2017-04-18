@@ -29,16 +29,6 @@ const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 const iconStyle = { width:30, height:30, borderRadius:15, margin:5 };
 const userIcon = { height:40, width:40, margin:5, borderRadius:20, backgroundColor:'#f8f8f8' };
 
-BackAndroid.addEventListener('hardwareBackPress', () => {
-  if (_navigator.getCurrentRoutes().length === 1  ) {
-    return false;
-  }
-  
-  socket.emit('listChat', { _id : this.state.user});
-  _navigator.pop();
-  return true;
-});
-
 export default class Chaty extends Component {
   constructor(props){
     super(props)
@@ -65,6 +55,16 @@ export default class Chaty extends Component {
   }
 
   componentDidMount() {
+    BackAndroid.addEventListener('hardwareBackPress', () => {
+      if (_navigator.getCurrentRoutes().length === 1  ) {
+        return false;
+      }
+      
+      socket.emit('listChat', { _id : this.state.user});
+      _navigator.pop();
+      return true;
+    });
+
     let self = this;
     this._onFetch();
     socket.on('getDirectMsg', function (hasil){
@@ -134,7 +134,7 @@ export default class Chaty extends Component {
     } else {
         return (
           <View style={{ flexDirection:'row', alignSelf:'flex-end', alignItems:'flex-end', margin:5 }}>
-            <View style={{ width:220, borderRadius:10, backgroundColor:'#00b499', padding:10 }}>
+            <View style={{ width:220, borderRadius:10, backgroundColor:'#2980B9', padding:10 }}>
               <Text style={{ fontSize:15, color:'#fff', fontWeight:'600' }}>{x.msg}</Text>
             </View>
             <Image
@@ -170,7 +170,7 @@ export default class Chaty extends Component {
     const { note } = this.state;
     return (
       <Image source={require('../images/background.jpg')} style={styles.container}>
-        <View style={{ height:65, flexDirection:'row', justifyContent:'space-between', backgroundColor:'#075e54', alignItems:'center', paddingTop:10 }}>
+        <View style={{ height:65, flexDirection:'row', justifyContent:'space-between', backgroundColor:'#2980B9', alignItems:'center', paddingTop:10 }}>
           <View style={{ flexDirection:'row', flex:1, alignItems:'center' }}>
             <TouchableOpacity onPress={() => {
               socket.emit('listChat', { _id : this.state.user});
@@ -182,11 +182,6 @@ export default class Chaty extends Component {
               renderImages(1, iconStyle)
             }
             <Text style={{ color:'#fff', fontWeight:'600', margin:10, fontSize:15 }}>{this.props.name}</Text>
-          </View>
-          <View style={styles.row}>
-            <Icon name="call" color='#fff' size={23} style={{ padding:5 }} />
-            <Icon name="attach-file" color='#fff' size={23} style={{ padding:5 }} />
-            <Icon name="more-vert" color='#fff' size={23} style={{ padding:5 }} />
           </View>
         </View>
 

@@ -15,7 +15,10 @@ import {
 import renderImages from '../fake/fakeImage';
 import { images, data } from '../fake/fakeChatList';
 import Empty from './empty';
+import {API} from './api';
+import io from 'socket.io-client';
 
+const socket = io(API, {jsonp : false});
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
 export default class Chats extends Component {
@@ -33,7 +36,10 @@ export default class Chats extends Component {
   componentDidMount() {
     this._onFetch();
     var self = this;
-    this.socket.on('listChat', function (hasil){
+    console.log("Component Did mount")
+    self.socket.emit("listChat", {_id : this.state.user})
+    self.socket.on('listChat', function (hasil){
+      console.log("From didmount", hasil);
       if (hasil.author == self.state.user) {
         if (hasil.data.length != 0) {
           self.setState({
@@ -49,17 +55,23 @@ export default class Chats extends Component {
     });
   }
 
-  componentWillMount() {
-  }
-
   componentWillUnmount() {
-    this.setState({
-      dataSource : ds.cloneWithRows([]),
-      empty : false,
-      user : null
-    });
+    console.log("Component Will Unmount");
+    socket.removeListener('listChat', (hasil) => {
+      console.log(hasil);
+    })
+    // this.setState({
+    //   dataSource : ds.cloneWithRows([]),
+    //   empty : false,
+    //   user : null
+    // });
   }
 
+  componentWillMount() {
+    socket.off("listChat", (hasil) => {
+      console.log("Will unmount", hasil)
+    })
+  }
   _onFetch () {
     var self = this;
     AsyncStorage.getItem('session', (err, result) => {
@@ -69,24 +81,31 @@ export default class Chats extends Component {
           user : obj._id,
         });
         self.socket.emit('listChat',{_id :  obj._id});
+        setInterval(() => {
+          self.socket.emit('listChat',{_id :  obj._id});
+        }, 10000);
       }
     });
   }
 
   eachMessage(x){
-    var name = x.first_name+" "+ x.last_name;
+    var name = x.name;
     return (
-      <TouchableOpacity onPress ={() => {this.props.navigator.push({id:'chat', image:1, name: name , receiver : x._id }) }}>
+      <TouchableOpacity onPress ={() => {this.props.navigator.push({id:'chat', image:1, name: name , receiver : x.name }) }}>
         <View style={{ alignItems:'center', padding:10, flexDirection:'row', borderBottomWidth:1, borderColor:'#f7f7f7' }}>
           {
             renderImages(1)
           }
           <View>
             <View style={{ flexDirection:'row', justifyContent:'space-between', width:280 }}>
-              <Text style={{ marginLeft:15, fontWeight:'600' }}>{x.first_name} {x.last_name}</Text>
+              <Text style={{ marginLeft:15, fontWeight:'600' }}>{x.name}</Text>
             </View>
             <View style={{ flexDirection:'row', alignItems:'center' }}>
-              <Text style={{ fontWeight:'400', color:'#333', marginLeft:15 }}>{x.messages}</Text>
+              <Text style={{ fontWeight:'400', color:'#333', marginLeft:15 }}>{x.sender == this.state.user ? "Anda : " : ""}
+                <Text style={{color : '#089', fontWeight : 'bold'}}>
+                   {x.message}
+                </Text>
+              </Text>
             </View>
           </View>
         </View>

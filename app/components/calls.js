@@ -139,7 +139,22 @@ export default class Calls extends Component {
           activeOpacity = {0.8}
           style = {[styles.buttonFloat]}>
             <Icon
-              name = {'plus'}
+              name = {'fire'}
+              color = {'white'}
+              style = {styles.buttonIcon}
+              size = {25}/>
+        </TouchableHighlight>
+        <TouchableHighlight
+          onPress = {() => {
+            this.props.navigator.push({
+              id : 'rescue',
+            });
+          }}
+          underlayColor = "#ddd"
+          activeOpacity = {0.8}
+          style = {[styles.buttonFloat, {bottom : 90}]}>
+            <Icon
+              name = {'car'}
               color = {'white'}
               style = {styles.buttonIcon}
               size = {25}/>

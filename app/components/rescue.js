@@ -192,8 +192,8 @@ class Rescue extends React.Component {
 								onPress={() => this.props.navigator.pop()}>
 								<Icon name="navigate-before" color='#fff' size={23} style={{ }} />
 							</TouchableOpacity>
-								<Text style={{ color:'#fff', fontWeight:'600', margin:10, fontSize:20}}>New Rescue </Text>
-								<Text style = {{color:'#fff', fontSize:15}} >{this.state.arr.length} of {this.state.jumlah} selected</Text>
+							<Text style={{ color:'#fff', fontWeight:'600', margin:10, fontSize:20}}>New Rescue </Text>
+							<Text style = {{color:'#fff', fontSize:15}} >{this.state.arr.length} of {this.state.jumlah} selected</Text>
 						</View>
 					</View>
 
