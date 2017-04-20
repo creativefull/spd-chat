@@ -23,7 +23,7 @@ BackAndroid.addEventListener('hardwareBackPress', () => {
 
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import renderImages from '../fake/fakeImage';
+import {renderIcon} from '../fake/fakeImage';
 import { images, data } from '../fake/fakeChatList';
 import Empty from './empty';
 
@@ -34,9 +34,7 @@ const styles = StyleSheet.create({
 		width: 40,
 		height: 40,
 		borderRadius: 20,
-		backgroundColor: '#1abc9c',
-		// backgroundColor: '#2ecc71',
-		// backgroundColor: '#075e75',
+		backgroundColor: '#2980B9',
 		right: 50,
 	},
 	labelIcon : {
@@ -48,7 +46,7 @@ const styles = StyleSheet.create({
 		width: 60,
 		height: 60,
 		borderRadius: 30,
-		backgroundColor: '#2ecc71',
+		backgroundColor: '#2980B9',
 		position: 'absolute',
 		bottom : 25,
 		right: 10,
@@ -71,7 +69,8 @@ class Rescue extends React.Component {
 			empty : false,
 			arr : [],
 			jumlah : 0,
-			user : ''
+			user : '',
+			typeRescue : this.props.typeResuce
 		};
 
 		this.socket = this.props.socket;
@@ -103,13 +102,10 @@ class Rescue extends React.Component {
 		var no = 0;
 		this.socket.on('createBroadcast', function (rows){
 			if (no == 0) {
-				self.props.navigator.push({
-					id : 'broadcast',
-					_id : rows._id,
-					cout : self.state.arr.length,
-					receiver : self.state.arr,
-					referal : 'rescue'
-				});
+				self.socket.emit('listBroad', {
+					_id : self.state.user
+				})
+				self.props.navigator.pop();
 			}
 			no = no + 1;
 		});
@@ -166,7 +162,7 @@ class Rescue extends React.Component {
 				activeOpacity = {0.8}
 				onPress ={() => this._onSelected(x)}>
 				<View style={{ alignItems:'center', padding:10, flexDirection:'row', borderBottomWidth:1, borderColor:'#f7f7f7' }}>
-					{ renderImages(1)}
+					{ renderIcon(10)}
 					<View>
 						<View style={{ flexDirection:'row', justifyContent:'space-between', width:280 }}>
 							<Text style={{ marginLeft:15, fontWeight:'600' }}>{x._id}</Text>
@@ -182,6 +178,7 @@ class Rescue extends React.Component {
 	}
 
 	render () {
+		const self = this;
 		if (!this.state.empty) {
 			return (
 				<View style = {{flex : 1}} >
@@ -208,8 +205,10 @@ class Rescue extends React.Component {
 							if (receiver.length != 0 ) {
 								this.socket.emit('createBroadcast',{
 									author : this.state.user,
-									receiver : this.state.arr
+									receiver : this.state.arr,
+									type : this.props.typeRescue
 								});
+								self.props.navigator.pop()
 							} else {
 								ToastAndroid.show('minimal 2 contact di pilih ', ToastAndroid.SHORT);
 							}

@@ -18,6 +18,7 @@ import {
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import {renderIcon} from '../fake/fakeImage';
 
 import Empty from './empty';
 
@@ -73,7 +74,9 @@ export default class Contacts extends Component {
       <TouchableOpacity
         onPress ={() => {this.props.navigator.push({id:'chat', image:1, name: name , receiver : x._id}) }}>
         <View style={{ alignItems:'center', padding:10, flexDirection:'row', borderBottomWidth:1, borderColor:'#f7f7f7' }}>
-          <Image source={require('../images/eminem.jpg')} style={{ borderRadius:30, width:60, height:60 }} resizeMode='contain' />
+          {
+            renderIcon(10)
+          }
           <View>
             <View style={{ flexDirection:'row', justifyContent:'space-between', width:280 }}>
               <Text style={{ marginLeft:15, fontWeight:'600', color:'#222', fontSize:15 }}>{x._id}</Text>

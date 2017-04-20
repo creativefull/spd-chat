@@ -5,6 +5,7 @@ import {
     StyleSheet,
     TextInput,
     TouchableHighlight,
+    BackAndroid,
     AsyncStorage
 } from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -22,6 +23,11 @@ export default class Login extends Component {
         this.socket = this.props.socket
     }
 
+    componentDidMount() {
+        BackAndroid.removeEventListener('hardwareBackPress', () => {
+            return false;
+        });
+    }
     componentWillMount() {
         var self = this;
         this.socket.on('login', function (data) {

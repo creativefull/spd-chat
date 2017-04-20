@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Image } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 const initStyle = { borderRadius: 30, width: 60, height: 60 };
 const renderImages = (num, style = initStyle) => {
   switch (num) {
@@ -25,8 +26,30 @@ const renderImages = (num, style = initStyle) => {
       return <Image source={require('../images/image10.jpeg')} style={style} resizeMode='contain' />;
 
     default: return <Image source={require('../images/image1.jpeg')} style={style} resizeMode='contain' />;
-
   }
 };
 
-module.exports = renderImages;
+const renderIcon = (num, style = initStyle) => {
+  switch (num) {
+    case 1:
+      return <Icon name="fire" size={60} color="#D00"/>;
+    case 2:
+      return <Icon name="car" size={60} color="#D00"/>;
+    case 3:
+      return <Icon name="child" size={60} color="#D00"/>;
+    case 4:
+      return <Icon name="flash" size={60} color="#D00"/>;
+    case 5:
+      return <Icon name="exchange" size={60} color="#D00"/>;
+    case 10:
+      return <Icon name="user" size={60} color="#2980B9"/>;
+    default:
+      return <Icon name="question" size={60} color="#D00"/>;
+  }
+}
+
+module.exports = {
+  renderImages : renderImages,
+  renderIcon : renderIcon
+}
+// module.exports = renderIcon;

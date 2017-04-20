@@ -64,6 +64,7 @@ class Register extends React.Component {
 			username : '',
 			password : '',
 			email : '',
+			alamat : ''
 		}
 		_navigator = this.props.navigator;
 		this.socket = this.props.socket
@@ -91,22 +92,28 @@ class Register extends React.Component {
 					color = {'#2980b9'}
 					visible = {this.state.visible} />
 				<Text style={styles.titleApp}>Sadulur</Text>
-				<Text style={styles.subTitle}>Sign Up Application</Text>
+				<Text style={styles.subTitle}>Register Aplikasi</Text>
 				<View style = {{alignItems : 'center'}} >
 					<Text style = {{color : 'red', marginBottom : 10}} > {this.state.pesan} </Text>
 				</View>
 				<TextInput
 					style={[styles.inputcontrol, this.state.empty ? {borderWidth : 1, borderColor : 'red'} : { borderWidth : 0}]}
 					underlineColorAndroid="transparent"
-					placeholder="First Name"
+					placeholder="Nama Depan"
 					value = {this.state.first_name}
 					onChangeText={(text) => this.setState({first_name : text})}/>
 				<TextInput
 					style={[styles.inputcontrol, this.state.empty ? {borderWidth : 1, borderColor : 'red'} : { borderWidth : 0}]}
 					underlineColorAndroid="transparent"
-					placeholder="Last Name"
+					placeholder="Nama Belakang"
 					value = {this.state.last_name}
 					onChangeText={(text) => this.setState({last_name : text})}/>
+				<TextInput
+					style={[styles.inputcontrol, this.state.empty ? {borderWidth : 1, borderColor : 'red'} : { borderWidth : 0}]}
+					underlineColorAndroid="transparent"
+					placeholder="Alamat Lengkap"
+					value = {this.state.alamat}
+					onChangeText={(text) => this.setState({alamat : text})}/>
 				<TextInput
 					style={[styles.inputcontrol, this.state.empty ? {borderWidth : 1, borderColor : 'red'} : { borderWidth : 0}]}
 					underlineColorAndroid="transparent"
@@ -153,6 +160,7 @@ class Register extends React.Component {
 				first_name : data.first_name,
 				last_name : data.last_name,
 				email : data.email,
+				alamat : data.alamat,
 				username : data.username,
 				password : data.password
 			});

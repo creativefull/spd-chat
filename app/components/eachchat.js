@@ -21,7 +21,7 @@ import {
   BackAndroid
 } from 'react-native';
 
-import renderImages from '../fake/fakeImage';
+import {renderIcon} from '../fake/fakeImage';
 
 const { width, height } = Dimensions.get('window');
 const convo = []
@@ -123,9 +123,6 @@ export default class Chaty extends Component {
     if(x.sender != sender){
       return (
         <View style={{ flexDirection:'row', alignItems:'flex-end', margin:5 }}>
-          {
-            renderImages(image, userIcon)
-          }
           <View style={{ width:220, borderRadius:10, backgroundColor:'#f4f4f4', padding:10 }}>
             <Text style={{ fontSize:15, color:'#555', fontWeight:'600' }}>{x.msg}</Text>
           </View>
@@ -137,10 +134,6 @@ export default class Chaty extends Component {
             <View style={{ width:220, borderRadius:10, backgroundColor:'#2980B9', padding:10 }}>
               <Text style={{ fontSize:15, color:'#fff', fontWeight:'600' }}>{x.msg}</Text>
             </View>
-            <Image
-              source ={require('../images/profile.jpg')}
-              resizeMode="contain"
-              style={userIcon}/>
           </View>
         );
     }
@@ -179,7 +172,7 @@ export default class Chaty extends Component {
               <Icon name="navigate-before" color='#fff' size={23} style={{ }} />
             </TouchableOpacity>
             {
-              renderImages(1, iconStyle)
+              renderIcon(10)
             }
             <Text style={{ color:'#fff', fontWeight:'600', margin:10, fontSize:15 }}>{this.props.name}</Text>
           </View>

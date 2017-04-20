@@ -30,7 +30,7 @@ BackAndroid.addEventListener('hardwareBackPress', () => {
 
 import Empty from './empty';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import renderImages from '../fake/fakeImage';
+import {renderIcon} from '../fake/fakeImage';
 
 const images = R.range(1, 11).map(i => i);
 
@@ -67,6 +67,24 @@ export default class Calls extends Component {
       }
     });
   }
+  componentDidUpdate() {
+    // this._onFetch();
+    var self = this;
+    this.socket.on('listBroad', (hasil) => {
+      if (hasil.author == self.state.user) {
+        if (hasil.data.length != 0) {
+          self.setState({
+            dataSource : ds.cloneWithRows(hasil.data),
+            empty : false,
+          });
+        } else {
+          self.setState({
+            empty : true,
+          });
+        }
+      }
+    })
+  }
 
   _onFetch () {
     var self = this;
@@ -82,30 +100,32 @@ export default class Calls extends Component {
   }
 
   eachMessage(x){
+    let iconBahaya = 0;
+    // alert(x.type);
+    if (x.type == "kebarakaran") {
+      iconBahaya = 1;
+    } else if (x.type == "kemalingan") {
+      iconBahaya = 2;
+    } else if (x.type == "bencana alam") {
+      iconBahaya = 3;
+    } else if (x.type == "perampokan") {
+      iconBahaya = 4;
+    } else {
+      iconBahaya = 5;
+    }
     return (
-      <TouchableOpacity
-        onPress = {() => {
-          this.props.navigator.push({
-            id : 'broadcast',
-            cout : x.receiver.length,
-            receiver : x.receiver,
-            _id : x._id
-          });
-        }}
-        activeOpacity = {0.8}>
-        <View style={{ alignItems:'center', padding:10, flexDirection:'row', borderBottomWidth:1, borderColor:'#f7f7f7' }}>
-          {
-            renderImages(x.image)
-          }
-          <View>
-            <View style={{ flexDirection:'row', justifyContent:'space-between', width:260 }}>
-            <Text style={{ marginLeft:15, fontWeight:'600', color:'#222' }}>{x.receiver.toString()}</Text>
-          </View>
-          <View style={{ flexDirection:'row', alignItems:'center', marginLeft:15, marginRight:5 }}>
-            <Text style={{ fontWeight:'400', color:'#666', fontSize:12 }}>{x.messages}</Text></View>
-          </View>
-       </View>
-     </TouchableOpacity>
+      <View style={{ alignItems:'center', padding:10, flexDirection:'row', borderBottomWidth:1, borderColor:'#f7f7f7' }}>
+        {
+          renderIcon(iconBahaya)
+        }
+        <View>
+          <View style={{ flexDirection:'row', justifyContent:'space-between', width:260 }}>
+          <Text style={{ marginLeft:15, fontWeight:'600', color:'#222' }}>{x.receiver.toString()}</Text>
+        </View>
+        <View style={{ flexDirection:'row', alignItems:'center', marginLeft:15, marginRight:5 }}>
+          <Text style={{ fontWeight:'400', color:'#666', fontSize:12 }}>{x.messages}</Text></View>
+        </View>
+      </View>
     )
   }
 
@@ -133,6 +153,7 @@ export default class Calls extends Component {
           onPress = {() => {
             this.props.navigator.push({
               id : 'rescue',
+              type : 'kebarakaran'
             });
           }}
           underlayColor = "#ddd"
@@ -148,6 +169,7 @@ export default class Calls extends Component {
           onPress = {() => {
             this.props.navigator.push({
               id : 'rescue',
+              type : 'kemalingan'
             });
           }}
           underlayColor = "#ddd"
@@ -155,6 +177,54 @@ export default class Calls extends Component {
           style = {[styles.buttonFloat, {bottom : 90}]}>
             <Icon
               name = {'car'}
+              color = {'white'}
+              style = {styles.buttonIcon}
+              size = {25}/>
+        </TouchableHighlight>
+        <TouchableHighlight
+          onPress = {() => {
+            this.props.navigator.push({
+              id : 'rescue',
+              type : 'perampokan'
+            });
+          }}
+          underlayColor = "#ddd"
+          activeOpacity = {0.8}
+          style = {[styles.buttonFloat, {bottom : (80*2)}]}>
+            <Icon
+              name = {'child'}
+              color = {'white'}
+              style = {styles.buttonIcon}
+              size = {25}/>
+        </TouchableHighlight>
+        <TouchableHighlight
+          onPress = {() => {
+            this.props.navigator.push({
+              id : 'rescue',
+              type : 'bencana alam'
+            });
+          }}
+          underlayColor = "#ddd"
+          activeOpacity = {0.8}
+          style = {[styles.buttonFloat, {bottom : (75*3)}]}>
+            <Icon
+              name = {'flash'}
+              color = {'white'}
+              style = {styles.buttonIcon}
+              size = {25}/>
+        </TouchableHighlight>
+        <TouchableHighlight
+          onPress = {() => {
+            this.props.navigator.push({
+              id : 'rescue',
+              type : 'other'
+            });
+          }}
+          underlayColor = "#ddd"
+          activeOpacity = {0.8}
+          style = {[styles.buttonFloat, {bottom : (72*4)}]}>
+            <Icon
+              name = {'exchange'}
               color = {'white'}
               style = {styles.buttonIcon}
               size = {25}/>

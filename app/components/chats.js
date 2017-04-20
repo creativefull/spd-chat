@@ -12,7 +12,7 @@ import {
   AsyncStorage
 } from 'react-native';
 
-import renderImages from '../fake/fakeImage';
+import {renderIcon} from '../fake/fakeImage';
 import { images, data } from '../fake/fakeChatList';
 import Empty from './empty';
 import {API} from './api';
@@ -94,7 +94,7 @@ export default class Chats extends Component {
       <TouchableOpacity onPress ={() => {this.props.navigator.push({id:'chat', image:1, name: name , receiver : x.name }) }}>
         <View style={{ alignItems:'center', padding:10, flexDirection:'row', borderBottomWidth:1, borderColor:'#f7f7f7' }}>
           {
-            renderImages(1)
+            renderIcon(10)
           }
           <View>
             <View style={{ flexDirection:'row', justifyContent:'space-between', width:280 }}>
