@@ -17,7 +17,7 @@ import Login from './login';
 import Register from './register';
 import Rescue from './rescue';
 import Broadcast from './broadcast';
-import Profile from './profile';
+import {Profile, EditProfile} from './profile';
 import {API} from './api';
 
 const styles = StyleSheet.create({
@@ -166,6 +166,15 @@ export default class Index extends Component {
     if (routeId === "profile") {
       return (
         <Profile
+          {...this.props}
+          socket={this.socket}
+          navigator={navigator}/>
+      )
+    }
+
+    if (routeId === "Editprofile") {
+      return (
+        <EditProfile
           {...this.props}
           socket={this.socket}
           navigator={navigator}/>
