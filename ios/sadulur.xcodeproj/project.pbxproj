@@ -32,6 +32,7 @@
 		4586E9CBB3A445A187ED70D7 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6983FFE53BCE4E6DA3C357E0 /* MaterialIcons.ttf */; };
 		6E99A68D34944517AB9DD1B9 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3338190CB4F8417CB542E9E3 /* Octicons.ttf */; };
 		3AFE96A49310469C905BE0FC /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB9DE127B9A2418992CB4CCB /* Zocial.ttf */; };
+		067FA7A2C4FF4319B18F5708 /* libRNBackgroundJob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C8D8345705AC4C958F38E571 /* libRNBackgroundJob.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -252,6 +253,8 @@
 		6983FFE53BCE4E6DA3C357E0 /* MaterialIcons.ttf */ = {isa = PBXFileReference; name = "MaterialIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		3338190CB4F8417CB542E9E3 /* Octicons.ttf */ = {isa = PBXFileReference; name = "Octicons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		EB9DE127B9A2418992CB4CCB /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		79258D3051BC4DC595CB954A /* RNBackgroundJob.xcodeproj */ = {isa = PBXFileReference; name = "RNBackgroundJob.xcodeproj"; path = "../node_modules/react-native-background-job/ios/RNBackgroundJob.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		C8D8345705AC4C958F38E571 /* libRNBackgroundJob.a */ = {isa = PBXFileReference; name = "libRNBackgroundJob.a"; path = "libRNBackgroundJob.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -279,6 +282,7 @@
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				43DA5C7EF73941B18447A978 /* libRNVectorIcons.a in Frameworks */,
+				067FA7A2C4FF4319B18F5708 /* libRNBackgroundJob.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,6 +428,7 @@
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				075ED5325BF54E4BACEEB11F /* RNVectorIcons.xcodeproj */,
+				79258D3051BC4DC595CB954A /* RNBackgroundJob.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -873,6 +878,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Debug;
@@ -889,6 +895,7 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/sadulur.app/sadulur";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};

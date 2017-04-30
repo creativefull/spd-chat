@@ -85,13 +85,7 @@ export default class Index extends Component {
   renderLoadingView () {
     return (
       <View style = {styles.container}>
-        <View style = {styles.rowSpinLarge} >
-          <ActivityIndicator
-            style = {{ flex : 1}}
-            animating = {true}
-            color = {'#fafafa'}
-            size = "large"/>
-        </View>
+        <Image source={require('../images/logo.png')} style={{width : 300, height : 300, justifyContent: 'center'}}/>
       </View>
     )
   }
