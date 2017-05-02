@@ -159,11 +159,9 @@ export default class Calls extends Component {
           underlayColor = "#ddd"
           activeOpacity = {0.8}
           style = {[styles.buttonFloat]}>
-            <Icon
-              name = {'fire'}
-              color = {'white'}
-              style = {styles.buttonIcon}
-              size = {25}/>
+          {
+            renderIcon(1)
+          }
         </TouchableHighlight>
         <TouchableHighlight
           onPress = {() => {
@@ -175,11 +173,9 @@ export default class Calls extends Component {
           underlayColor = "#ddd"
           activeOpacity = {0.8}
           style = {[styles.buttonFloat, {bottom : 90}]}>
-            <Icon
-              name = {'car'}
-              color = {'white'}
-              style = {styles.buttonIcon}
-              size = {25}/>
+          {
+            renderIcon(2)
+          }
         </TouchableHighlight>
         <TouchableHighlight
           onPress = {() => {
@@ -191,27 +187,9 @@ export default class Calls extends Component {
           underlayColor = "#ddd"
           activeOpacity = {0.8}
           style = {[styles.buttonFloat, {bottom : (80*2)}]}>
-            <Icon
-              name = {'child'}
-              color = {'white'}
-              style = {styles.buttonIcon}
-              size = {25}/>
-        </TouchableHighlight>
-        <TouchableHighlight
-          onPress = {() => {
-            this.props.navigator.push({
-              id : 'rescue',
-              type : 'bencana alam'
-            });
-          }}
-          underlayColor = "#ddd"
-          activeOpacity = {0.8}
-          style = {[styles.buttonFloat, {bottom : (75*3)}]}>
-            <Icon
-              name = {'flash'}
-              color = {'white'}
-              style = {styles.buttonIcon}
-              size = {25}/>
+            {
+              renderIcon(3)
+            }
         </TouchableHighlight>
         <TouchableHighlight
           onPress = {() => {
@@ -222,12 +200,10 @@ export default class Calls extends Component {
           }}
           underlayColor = "#ddd"
           activeOpacity = {0.8}
-          style = {[styles.buttonFloat, {bottom : (72*4)}]}>
-            <Icon
-              name = {'exchange'}
-              color = {'white'}
-              style = {styles.buttonIcon}
-              size = {25}/>
+          style = {[styles.buttonFloat, {bottom : (75*3)}]}>
+          {
+            renderIcon(5)
+          }
         </TouchableHighlight>
       </View>
     );

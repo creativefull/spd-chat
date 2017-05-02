@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
 
   logo:{
     color:'#fff',
-    fontSize:23,
+    fontSize:20,
     margin:10,
     marginLeft:20,
     fontWeight:'500',

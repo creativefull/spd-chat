@@ -32,15 +32,15 @@ const renderImages = (num, style = initStyle) => {
 const renderIcon = (num, style = initStyle) => {
   switch (num) {
     case 1:
-      return <Icon name="fire" size={60} color="#D00"/>;
+      return <Image source={require('../images/fire.png')} style={{width : 60, height : 60}} resizeMode='contain' />;
     case 2:
-      return <Icon name="car" size={60} color="#D00"/>;
+      return <Image source={require('../images/thief.png')} style={{width : 60, height : 60}} resizeMode='contain' />;
     case 3:
-      return <Icon name="child" size={60} color="#D00"/>;
+      return <Image source={require('../images/pistol.png')} style={{width : 60, height : 60}} resizeMode='contain' />;
     case 4:
       return <Icon name="flash" size={60} color="#D00"/>;
     case 5:
-      return <Icon name="exchange" size={60} color="#D00"/>;
+      return <Icon name="plus" size={60} color="#D00"/>;
     case 10:
       return <Icon name="user" size={60} color="#2980B9"/>;
     default:

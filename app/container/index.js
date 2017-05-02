@@ -42,13 +42,18 @@ const backgroundJob = {
       })      
     }
 };
+BackgroundJob.cancelAll();
 BackgroundJob.register(backgroundJob);
 
 export default class Index extends Component {
   componentDidMount() {
     var backgroundSchedule = {
       jobKey: "notifRescue",
-      timeout: 100,
+      timeout: 10000,
+      alwaysRunning : true,
+      notificationTitle : "Sadulur",
+      notificationText : "Terhubung",
+      warn : false,
       period: 1000
     }
 
